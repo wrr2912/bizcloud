@@ -29,7 +29,7 @@ public class SysAuthRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 		// TODO Auto-generated method stub
-		log.info("shiro验证-授权");
+		log.debug("shiro验证-授权");
 		try{
 			/*String loginUserName = (String) principalCollection.getPrimaryPrincipal();
 			log.info("loginUserName=" + loginUserName);
