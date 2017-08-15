@@ -24,7 +24,7 @@ public class LoginController {
 	@RequestMapping("/login")
 	@ResponseBody
     public String login(String userName,String password) {
-		log.info("login userName= " + userName + "password=" + password);
+		log.info("login userName=" + userName + "password=" + password);
 		Response response = new Response();
         UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(userName,password);
         Subject subject = SecurityUtils.getSubject();
