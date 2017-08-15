@@ -53,7 +53,6 @@ public class LoginController {
     public String logout() {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
-//        session.removeAttribute("user");
         return Response.success("logout");
     }
 
