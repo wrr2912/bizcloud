@@ -65,9 +65,8 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSuccessUrl("/sa/index");  
         filterChainDefinitionMap.put("/sa/**", "authc");  
         filterChainDefinitionMap.put("/**", "anon");  
-        shiroFilterFactoryBean  
-                .setFilterChainDefinitionMap(filterChainDefinitionMap);  
+        shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);  
         return shiroFilterFactoryBean;  
-    }  
+    }
   
 }  
