@@ -9,6 +9,7 @@ import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
+import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
 import org.apache.shiro.authz.SimpleAuthorizationInfo;
@@ -64,14 +65,19 @@ public class SysAuthRealm extends AuthorizingRealm {
 		// TODO Auto-generated method stub
 		log.info("shiro验证-登录");
 		try{
-			/*//用户输入用户名和密码 userToken
+			//用户输入用户名和密码 userToken
 			UsernamePasswordToken userToken = (UsernamePasswordToken) token;
-			//从数据库查询的用户信息
+			/*//从数据库查询的用户信息
 			User user = this.userDao.queryUserByUserName(userToken.getUsername());
 			if(user != null){
 				//匹配用户名和密码
 				return new SimpleAuthenticationInfo(user.getUserName(),user.getPassword(), getName());
 			}*/
+			
+			if(userToken.getUsername().equals("admin")){
+				return new SimpleAuthenticationInfo("admin","admin", "admin");
+			}
+			
 		}catch(Exception ex){
 			ex.printStackTrace();
 			throw new AuthenticationException(ex);
