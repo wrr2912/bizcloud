@@ -1,4 +1,4 @@
-package com.dhxa.bizcloud.appservice.sysadmin;
+package com.dhxa.bizcloud.appservice.controller.sysadmin;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;

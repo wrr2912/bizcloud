@@ -1,4 +1,4 @@
-package com.dhxa.bizcloud.appservice.sysadmin;
+package com.dhxa.bizcloud.appservice.controller.sysadmin;
 
 import org.apache.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
