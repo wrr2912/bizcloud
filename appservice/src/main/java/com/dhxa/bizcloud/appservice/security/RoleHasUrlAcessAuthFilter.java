@@ -4,13 +4,14 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.web.filter.authz.AuthorizationFilter;
 
 public class RoleHasUrlAcessAuthFilter extends AuthorizationFilter {
 
-	private Logger log = Logger.getLogger(RoleHasUrlAcessAuthFilter.class);
+	private Logger log = LoggerFactory.getLogger(RoleHasUrlAcessAuthFilter.class);
 	
 	@Override
 	protected boolean isAccessAllowed(ServletRequest request,ServletResponse response, Object mappedValue) throws Exception {

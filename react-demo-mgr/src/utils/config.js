@@ -7,11 +7,11 @@ module.exports = {
   iconFontJS: '/iconfont.js',
   baseURL: 'http://demo-management.apps.devpcf.com',
   YQL: ['http://www.zuimeitianqi.com'],
-  CORS: ['http://localhost:7000', 'http://localhost:8000', 'http://localhost:8088', 'http://localhost:8082', 'http://localhost:8080','http://localhost:8086', 'http://demo-management.apps.devpcf.com'],
+  CORS: ['http://localhost:7000', 'http://localhost:8000', 'http://localhost:8088', 'http://localhost:8082', 'http://localhost:8080','http://192.168.2.103:8086', 'http://demo-management.apps.devpcf.com'],
   openPages: ['/login'],
   apiPrefix: '/api/v1',
  // serviceDomain: '/hosts/demo-application',
-  serviceDomain:'http://localhost:8086',
+  serviceDomain:'http://192.168.2.103:8086',
   defaultPageSize: 20,
   api: {
     userLogin: '/user/login',

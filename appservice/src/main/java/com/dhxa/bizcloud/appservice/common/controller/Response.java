@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
-import org.apache.log4j.Logger;
 
 /**
  * @author sks
@@ -17,7 +20,7 @@ import org.apache.log4j.Logger;
  */
 public class Response {
 
-	private static Logger log = Logger.getLogger(Response.class);
+	private static Logger log = LoggerFactory.getLogger(Response.class);
 
 	public String resCodeKey = "resCode";
 	public String resMsgKey = "resMsg";
@@ -75,7 +78,7 @@ public class Response {
 	 * @return
 	 */
 	public static String systemError(Exception e) {
-		log.error(e, e);
+		log.error(e.getMessage(), e);
 		return "{\"resCode\":\"" + Response.SERVICE_ERROR + "\",\"resMsg\":\"系统处理出错!\",\"data\":{},\"rows\":[],\"total\":\"0\"}";
 	}
 
@@ -85,7 +88,7 @@ public class Response {
 	 * @return
 	 */
 	public static String systemError(DaoException e) {
-		log.error(e, e);
+		log.error(e.getMessage(), e);
 		return "{\"resCode\":\"" + Response.SERVICE_ERROR + "\",\"resMsg\":\"系统处理出错:" + e.getMessage().replaceAll("\"", "") + "\",\"data\":{}}";
 	}
 	
@@ -133,7 +136,7 @@ public class Response {
 	 */
 	@Deprecated
 	public Response catchException(Exception e) {
-		log.error(e, e);
+		log.error(e.getMessage(), e);
 		data.put(resCodeKey, Response.SERVICE_ERROR);
 		data.put(resMsgKey, "系统处理出错");
 		return this;
@@ -270,7 +273,7 @@ public class Response {
 		try {
 			return JSONObject.fromObject(this.data).toString();
 		} catch (Exception e) {
-			log.error(e, e);
+			log.error(e.getMessage(), e);
 			return "{\"data\":{},\"resCode\":\"500010\",\"resMsg\":\"webservice服务端JSON转换出错\"}";
 		}
 	}
@@ -290,7 +293,7 @@ public class Response {
 		try {
 			return JSONObject.fromObject(this.data).toString();
 		} catch (Exception e) {
-			log.error(e, e);
+			log.error(e.getMessage(), e);
 			return "{\"total\":\"0\",\"rows\":[]}";
 		}
 	}
@@ -313,7 +316,7 @@ public class Response {
 			//return JSONArray.fromObject((quickPager.getData() == null ? new ArrayList<Object>(0) : quickPager.getData())).toString();
 			return JSONObject.fromObject(this.data).toString();
 		} catch (Exception e) {
-			log.error(e, e);
+			log.error(e.getMessage(), e);
 			return "{\"totalCount\":\"0\",\"items\":[]}";
 		}
 	}
@@ -335,7 +338,7 @@ public class Response {
 		try {
 			return JSONObject.fromObject(this.data).toString();
 		} catch (Exception e) {
-			log.error(e, e);
+			log.error(e.getMessage(), e);
 			return "{\"totalCount\":\"0\",\"items\":[]}";
 		}
 	}
@@ -344,7 +347,7 @@ public class Response {
 		try {
 			return JSONArray.fromObject(list).toString();
 		} catch (Exception e) {
-			log.error(e, e);
+			log.error(e.getMessage(), e);
 			return "{\"total\":\"0\",\"rows\":[]}";
 		}
 	}

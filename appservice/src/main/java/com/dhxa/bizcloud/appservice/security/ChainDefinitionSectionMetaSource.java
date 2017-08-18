@@ -1,11 +1,5 @@
 package com.dhxa.bizcloud.appservice.security;
 
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-
-import org.apache.log4j.Logger;
 import org.apache.shiro.config.Ini;
 import org.apache.shiro.config.Ini.Section;
 import org.springframework.beans.factory.FactoryBean;

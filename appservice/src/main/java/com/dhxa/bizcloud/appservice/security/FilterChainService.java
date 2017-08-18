@@ -1,20 +1,16 @@
 package com.dhxa.bizcloud.appservice.security;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 import javax.annotation.Resource;
-import javax.servlet.Filter;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.filter.mgt.DefaultFilterChainManager;
-import org.apache.shiro.web.filter.mgt.NamedFilterList;
 import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
 import org.apache.shiro.web.servlet.AbstractShiroFilter;
 
 public class FilterChainService {
 
-	private Logger log = Logger.getLogger(FilterChainService.class);
+	private Logger log = LoggerFactory.getLogger(FilterChainService.class);
 	
 	@Resource(name = "&shiroFilter")
 	private ShiroFilterFactoryBean shiroFilterFactoryBean = null;

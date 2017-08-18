@@ -1,6 +1,8 @@
 package com.dhxa.bizcloud.appservice.controller.sysadmin;
 
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
@@ -22,13 +24,10 @@ import com.dhxa.bizcloud.appservice.entity.User;
 @EnableAutoConfiguration
 public class LoginController {
 	
-	private Logger log = Logger.getLogger(LoginController.class);
+	private Logger log = LoggerFactory.getLogger(LoginController.class);
 	
 	@Autowired
-	private UserClient userClient;
-	
-
-	
+	private UserClient userClient;	
 	
 	@RequestMapping("/login")
 	@ResponseBody

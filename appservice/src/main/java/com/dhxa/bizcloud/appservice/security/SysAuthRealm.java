@@ -1,24 +1,19 @@
 package com.dhxa.bizcloud.appservice.security;
 
-import java.util.List;
-
-import javax.annotation.Resource;
-
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
 import org.apache.shiro.authc.SimpleAuthenticationInfo;
-import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.AuthorizationInfo;
-import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 
 public class SysAuthRealm extends AuthorizingRealm {
 
-	private Logger log = Logger.getLogger(SysAuthRealm.class);
+	private Logger log = LoggerFactory.getLogger(SysAuthRealm.class);
 	
 	/*@Resource(name = "userDao")
 	UserDao userDao = null;*/
