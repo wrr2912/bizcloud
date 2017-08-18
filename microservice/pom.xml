@@ -11,150 +11,30 @@
 	<url>http://maven.apache.org</url>
 
 	<properties>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>1.8</java.version>
-    </properties>
-
-	<parent>
-	   <groupId>com.rayfay.bizcloud</groupId>
-	   <artifactId>bizcloud-application-starter</artifactId>
-	   <version>0.0.1-SNAPSHOT</version>
-	   <relativePath/>
-	</parent>
-
-	<dependencyManagement>
-		<dependencies>
-			
-			<dependency>
-				<groupId>org.springframework.cloud</groupId>
-				<artifactId>spring-cloud-dependencies</artifactId>
-				<version>Camden.SR7</version>
-				<type>pom</type>
-			</dependency>
-
-		</dependencies>
-	</dependencyManagement>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+	
+ 	<parent>
+ 		<groupId>com.rayfay.bizcloud</groupId>
+ 		<artifactId>bizcloud-application-starter</artifactId>
+ 		<version>0.0.1-SNAPSHOT</version>
+ 		<relativePath/>
+ 	</parent>
 
 	<dependencies>
-	
 		<dependency>
-            <groupId>com.rayfay.bizcloud</groupId>
-            <artifactId>core-commons</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-		
-		<dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-feign</artifactId>
-            <version>1.3.2.RELEASE</version>
-        </dependency>
-		
-		<dependency>
-            <groupId>io.pivotal.spring.cloud</groupId>
-            <artifactId>spring-cloud-services-starter-service-registry</artifactId>
-        </dependency>
-		
-		<dependency>
-            <groupId>com.cloudfoundry.connector</groupId>
-            <artifactId>oracle-connector</artifactId>
-            <version>0.1.0-SNAPSHOT</version>
-        </dependency>
-        
-		<dependency><!-- 是否可删除此依赖项？ -->
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>com.rayfay.bizcloud</groupId>
+			<artifactId>core-commons</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
-
+		
 		<dependency>
 			<groupId>com.oracle</groupId>
 			<artifactId>ojdbc14</artifactId>
 			<version>10.2.0.4.0</version>
 		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-config-server</artifactId>
-			<version>1.3.2.RELEASE</version>
-		</dependency>
-
-
-		<dependency><!-- 是否可删除此依赖项？ -->
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka-server</artifactId>
-			<version>1.3.2.RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-eureka</artifactId>
-			<version>1.3.2.RELEASE</version>
-		</dependency>
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>3.8.1</version>
-			<scope>test</scope>
-		</dependency>
-		
-		 <!--cloudfoundry-client-->
-        <dependency>
-            <groupId>org.cloudfoundry</groupId>
-            <artifactId>cloudfoundry-client-reactor</artifactId>
-            <version>2.8.0.RELEASE</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>org.cloudfoundry</groupId>
-            <artifactId>cloudfoundry-operations</artifactId>
-            <version>2.8.0.RELEASE</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>io.projectreactor</groupId>
-            <artifactId>reactor-core</artifactId>
-            <version>3.0.5.RELEASE</version>
-        </dependency>
-        
-        <dependency>
-            <groupId>io.projectreactor.ipc</groupId>
-            <artifactId>reactor-netty</artifactId>
-            <version>0.6.2.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.29</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-            <version>2.2.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.2.2</version>
-        </dependency>    
-          
-         <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-            <version>2.2.2</version>
-        </dependency> 
-        <!--cloudfoundry-client-end-->
-        
-        
 	</dependencies>
 
 	<build>

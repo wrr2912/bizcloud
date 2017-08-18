@@ -30,8 +30,8 @@ public class Dept implements java.io.Serializable {
 	@Column(name = "CITY")
 	private String city;
 	
-	@Column(name = "COUNTY")
-	private String county;
+	@Column(name = "COUNTRY")
+	private String country;
 	
 	@Column(name = "CREATE_TIME")
 	private String createTime;
@@ -42,7 +42,7 @@ public class Dept implements java.io.Serializable {
 	@Column(name = "ISDELETE")
 	private String isdelete;
 	
-	@Column(name = "HIGER_DEPT_ID")
+	@Column(name = "HIGHER_DEPT_ID")
 	private Long higherDeptId;
 	
 	@Column(name = "EMAIL")
@@ -56,13 +56,13 @@ public class Dept implements java.io.Serializable {
 	}
 
 	public Dept(Long id, String deptName, String province, String city,
-			String county, String createTime, Long creator,
+			String country, String createTime, Long creator,
 			String isdelete, Long higherDeptId, String email) {
 		this.id = id;
 		this.deptName = deptName;
 		this.province = province;
 		this.city = city;
-		this.county = county;
+		this.country = country;
 		this.createTime = createTime;
 		this.creator = creator;
 		this.isdelete = isdelete;
@@ -102,12 +102,12 @@ public class Dept implements java.io.Serializable {
 		this.city = city;
 	}
 
-	public String getCounty() {
-		return this.county;
+	public String getCountry() {
+		return this.country;
 	}
 
-	public void setCounty(String county) {
-		this.county = county;
+	public void setCountry(String country) {
+		this.country = country;
 	}
 
 	public String getCreateTime() {

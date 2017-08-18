@@ -53,6 +53,7 @@ public class DeptController {
             logger.info("dept-get result: = [{}],{}",id,(info != null) ? info.toString(): "");
             return ResponseUtil.makeSuccessResponse(result.size(), result);
         }catch(Exception e){
+        	System.out.println(e.toString());
             throw new NRAPException(SystemErrorCodeType.E_GET_DATA_FALED);
         }
     }
@@ -76,7 +77,7 @@ public class DeptController {
             dbData.setDeptName(data.getDeptName());
             dbData.setProvince(data.getProvince());
             dbData.setCity(data.getCity());
-            dbData.setCounty(data.getCounty());
+            dbData.setCountry(data.getCountry());
             dbData.setCreateTime(data.getCreateTime());
             dbData.setCreator(data.getCreator());
             dbData.setIsdelete(data.getIsdelete());

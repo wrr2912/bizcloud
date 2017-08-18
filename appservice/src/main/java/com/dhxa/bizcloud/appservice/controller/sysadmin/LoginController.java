@@ -29,7 +29,7 @@ public class LoginController {
 	@Autowired
 	private UserClient userClient;	
 	
-	@RequestMapping("/login")
+	@RequestMapping("/loginme")
 	@ResponseBody
     public String login(String userName,String password) {
 		log.info("login userName=" + userName + "password=" + password );
