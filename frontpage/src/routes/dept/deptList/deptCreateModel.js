@@ -55,8 +55,8 @@ const DeptCreateModel = ({
     <Modal {...modalProps} onOk={handleOk} okText="保存" title="新增单位">
       <Form layout="horizontal">
         <FormItem label="名称" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('DEPTNAME', {
-            initialValue: editObj !== null ? editObj.deptname : '',
+          {getFieldDecorator('deptName', {
+            initialValue: editObj !== null ? editObj.deptName : '',
             rules: [
               {
                 required: true,
@@ -73,28 +73,28 @@ const DeptCreateModel = ({
         </FormItem>
 
         <FormItem label="省份" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('PROVINCE', {
-            initialValue: editObj !== null ? editObj.parent_id : '',
+          {getFieldDecorator('province', {
+            initialValue: editObj !== null ? editObj.province : '',
           })(<Input />)}
         </FormItem>
         <FormItem label="城市" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('CITY', {
-            initialValue: editObj !== null ? editObj.parent_id : '',
+          {getFieldDecorator('city', {
+            initialValue: editObj !== null ? editObj.city : '',
           })(<Input />)}
         </FormItem>
         <FormItem label="区域" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('COUNTY', {
-            initialValue: editObj !== null ? editObj.parent_id : '',
+          {getFieldDecorator('country', {
+            initialValue: editObj !== null ? editObj.country : '',
           })(<Input />)}
         </FormItem>
         <FormItem label="创办时间" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('CREATETIME', {
-            initialValue: editObj !== null ? editObj.parent_id : '',
+          {getFieldDecorator('createTime', {
+            initialValue: editObj !== null ? editObj.createTime : '',
           })(<Input />)}
         </FormItem>
         <FormItem label="邮箱" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('EMAIL', {
-            initialValue: editObj !== null ? editObj.parent_id : '',
+          {getFieldDecorator('email', {
+            initialValue: editObj !== null ? editObj.email : '',
           })(<Input />)}
         </FormItem>
       </Form>

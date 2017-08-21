@@ -12,32 +12,32 @@ const DeptListTable = ({ dispatch, deptTableDataSource, deptTableLoading, pagina
     },
     {
       title: '单位名称',
-      dataIndex: 'DEPTNAME',
+      dataIndex: 'deptName',
       width: 100,
     },
     {
       title: '所在省份',
-      dataIndex: 'PROVINCE',
+      dataIndex: 'province',
       width: 100,
     },
     {
       title: '所在城市',
-      dataIndex: 'CITY',
+      dataIndex: 'city',
       width: 100,
     },
     {
       title: '所在区域',
-      dataIndex: 'COUNTY',
+      dataIndex: 'country',
       width: 100,
     },
     {
       title: '成立时间',
-      dataIndex: 'CREATETIME',
+      dataIndex: 'createTime',
       width: 100,
     },
     {
       title: '单位邮箱',
-      dataIndex: 'EMAIL',
+      dataIndex: 'email',
       width: 100,
     },
     {
