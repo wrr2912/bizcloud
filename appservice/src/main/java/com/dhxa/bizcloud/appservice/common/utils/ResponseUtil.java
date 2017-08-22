@@ -18,8 +18,12 @@ public class ResponseUtil {
 		Map<String, Object> responseMap = new HashMap<>();
 
 		responseMap.put("success", true);
-		responseMap.put("rows", rows);
-		responseMap.put("totalNum", rowsTotal);
+
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("rows", rows);
+		resultMap.put("totalNum", rowsTotal);
+
+		responseMap.put("result", resultMap);
 
 		return responseMap;
 	}
@@ -34,9 +38,12 @@ public class ResponseUtil {
 		Map<String, Object> responseMap = new HashMap<>();
 
 		responseMap.put("success", true);
-		responseMap.put("rows", rows);
-		responseMap.put("totalNum", rows != null ? rows.size() : 0);
 
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("rows", rows);
+		resultMap.put("totalNum", rows != null ? rows.size() : 0);
+
+		responseMap.put("result", resultMap);
 
 		return responseMap;
 	}

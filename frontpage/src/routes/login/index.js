@@ -22,7 +22,6 @@ const Login = ({
       if (errors) {
         return
       }
-      console.log("--------------------------------"+JSON.stringify(values));
       dispatch({ type: 'login/login', payload: values })
     })
   }
@@ -35,7 +34,7 @@ const Login = ({
       </div>
       <form>
         <FormItem hasFeedback>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('username', {
             rules: [
               {
                 required: true,
