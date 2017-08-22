@@ -176,7 +176,7 @@ const Routers = function ({ history, app }) {
               cb(null, require('./routes/chart/areaChart/'))
             }, 'chart-areaChart')
           },
-        }, {
+        },  {
           path: 'dept/deptList',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {

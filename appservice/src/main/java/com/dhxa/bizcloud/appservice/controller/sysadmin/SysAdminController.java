@@ -15,7 +15,8 @@ public class SysAdminController {
 	@ResponseBody
     public String index() {	
 		Subject subject = SecurityUtils.getSubject();
-		return "index,userName=" + subject.getPrincipal();
+		
+		return "index,userName=" + subject.getPrincipal() + subject.getSession().getId();
 	}
 
 }
