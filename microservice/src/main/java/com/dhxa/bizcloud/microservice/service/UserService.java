@@ -16,4 +16,8 @@ public class UserService {
 		 return this.userRepository.findUserByUserName(userName);		 
 	 }
 	 
+	 public User findUserById(Long id) {
+		 return this.userRepository.findOne(id);
+	 }
+	 
 }

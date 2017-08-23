@@ -19,7 +19,7 @@ module.exports = {
     userLogout: '/user/logout',
     userInfo: '/userInfo',
     users: '/users',
-    user: '/p/user/:id',
+    user: '/user/get/:id',
     menus: '/p/menus',
     dashboard: '/dashboard',
     // custom
