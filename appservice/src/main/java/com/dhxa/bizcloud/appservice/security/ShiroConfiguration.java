@@ -62,7 +62,8 @@ public class ShiroConfiguration {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();  
         shiroFilterFactoryBean.setSecurityManager(getDefaultWebSecurityManager());  
         shiroFilterFactoryBean.setLoginUrl("/login");  
-    //    shiroFilterFactoryBean.setSuccessUrl("/");  
+        shiroFilterFactoryBean.setSuccessUrl("/");  
+        filterChainDefinitionMap.put("/login", "anon");
         filterChainDefinitionMap.put("/**", "authc");
         shiroFilterFactoryBean.setFilterChainDefinitionMap(filterChainDefinitionMap);  
         return shiroFilterFactoryBean;  
