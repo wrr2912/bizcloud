@@ -1,4 +1,5 @@
-import { query, logout, getMenus } from '../services/app'
+import { query,login, logout, getMenus } from '../services/app'
+import { queryURL } from '../utils';
 import { routerRedux } from 'dva/router'
 import { parse } from 'qs'
 import { config } from '../utils'
@@ -8,6 +9,7 @@ export default {
   state: {
     menus: [],
     user: {},
+    loginLoading: false,
     personal: { link: '/personal2', title: '个人信息' },
     menuPopoverVisible: false,
     siderFold: localStorage.getItem(`${prefix}siderFold`) === 'true',
@@ -18,9 +20,8 @@ export default {
     activeMenu: { key: '' },
   },
   subscriptions: {
-
     setup ({ dispatch }) {
-      dispatch({ type: 'query' })
+      dispatch({ type: 'init', payload:{}})
       let tid
       window.onresize = () => {
         clearTimeout(tid)
@@ -32,9 +33,38 @@ export default {
 
   },
   effects: {
+    * init({state, payload},{select, call, put}){
+      /*const isLogin = yield select(state => state.app.isLogin)
+      const user = yield select(state => state.app.user)
+      if(isLogin) {
+        yield put({type:'query'});
+      }else {
+        if (location.pathname !== '/login') {
+
+          let from = location.pathname
+          if (location.pathname === '/dashboard') {
+            from = '/dashboard'
+          }
+          window.location.href = `${location.origin}/login?from=${from}`
+        }*/
+        const data = yield call(login, payload:{});
+        if(data.success && data.result && data.result.user){
+          yield put({type:'query'});
+        }else {
+          if (location.pathname !== '/login') {
+
+            let from = location.pathname
+            if (location.pathname === '/dashboard') {
+              from = '/dashboard'
+            }
+            window.location.href = `${location.origin}/login?from=${from}`
+          }
+      }
+    },
+
     * query ({
       payload,
-    }, { call, put }) {
+    }, {call, put }) {
       const data = yield call(query, parse(payload))
       if (data.success && data.user) {
         yield put({
@@ -60,23 +90,42 @@ export default {
         if (location.pathname === '/dashboard') {
           from = '/dashboard'
         }
-       window.location = `${location.origin}/login?from=${from}`
+        window.location.href = `${location.origin}/login?from=${from}`
+      }
+
+    },
+
+    *login ({
+      payload,
+    }, { put, call }) {
+      yield put({ type: 'showLoginLoading' });
+      const data = yield call(login, payload);
+      yield put({ type: 'hideLoginLoading' });
+      if (data.success && data.result && data.result.user) {
+        const from = queryURL('from');
+        yield put({ type: 'query'});
+        if (from) {
+          yield put(routerRedux.push(from));
+        } else {
+          yield put(routerRedux.push('/dashboard'));
+        }
+      } else {
+        throw data
       }
     },
 
     * logout ({ payload }, { call, put }) {
-      let from = location.pathname
-      if (location.pathname === '/dashboard') {
-        from = '/dashboard'
-      }
-      window.location = `${location.origin}/logout?from=${from}`
-
-      // const data = yield call(logout, parse(payload))
-      // if (data.success) {
-      //   yield put({ type: 'query' })
-      // } else {
-      //   throw (data)
-      // }
+      const data = yield call(logout, parse(payload))
+       if (data.success) {
+     /*    let from = location.pathname
+         if (location.pathname === '/dashboard') {
+           from = '/dashboard'
+         }
+         window.location = `${location.origin}/logout?from=${from}`*/
+         yield put({ type: 'query' })
+       } else {
+         throw (data)
+       }
     },
     * changeNavbar ({
       payload,
@@ -148,6 +197,19 @@ export default {
       return {
         ...state,
         activeMenu,
+      }
+    },
+
+    showLoginLoading (state) {
+      return {
+        ...state,
+        loginLoading: true,
+      }
+    },
+    hideLoginLoading (state) {
+      return {
+        ...state,
+        loginLoading: false,
       }
     },
   },

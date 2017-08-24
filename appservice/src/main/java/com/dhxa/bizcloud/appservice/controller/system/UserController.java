@@ -1,6 +1,8 @@
 package com.dhxa.bizcloud.appservice.controller.system;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -40,8 +42,12 @@ public class UserController {
             	return ResponseUtil.makeErrorResponse(jsonObject.getString("errorCode"), jsonObject.getString("message"));
             }
     	}else {
-    		Subject subject = SecurityUtils.getSubject();		
-            return ResponseUtil.makeSuccessResponse(subject.getPrincipal());
+    		Subject subject = SecurityUtils.getSubject();
+    		logger.info("subject.getPrincipal()" + subject.getPrincipal() + ",sessionid=" + subject.getSession().getId());
+    		Map result = new HashMap();
+    		result.put("user", subject.getPrincipal());
+    		result.put("sessionid", subject.getSession().getId());
+            return ResponseUtil.makeSuccessResponse(result);
     	}
         
     }

@@ -3,14 +3,9 @@ const { api } = config
 const { userLogin } = api
 
 export async function login (data) {
- /* return request({
-    url: userLogin,
-    method: 'post',
-    data,
-  })*/
-  return request({
-    url:userLogin+"?userName=admin&password=admin",
-    method: 'GET',
+ return request({
+    url: `${userLogin}?userName=${data.userName}&password=${data.password}`,
+    method: "GET",
     withCredential: true,
-  })
+  });
 }
