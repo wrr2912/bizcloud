@@ -8,7 +8,6 @@ export async function login (params) {
     url: userLogin,
     method: 'post',
     data: params,
-    withCredential: true,
   })
 }
 
@@ -28,14 +27,8 @@ export async function query (params) {
     withCredential: true,
   }).then((userData) => {
     if (userData.success && userData.result) {
-      if(userData.result.user){
-        userData.user = userData.result.user
-      }
-      if(userData.result.sessionid){
-        userData.sessionid = userData.result.sessionid
-      }
+      userData.user = userData.result
     }
-
     return userData
   })
 }

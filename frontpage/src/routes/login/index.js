@@ -8,21 +8,21 @@ import styles from './index.less'
 const FormItem = Form.Item
 
 const Login = ({
-  app,
+  login,
   dispatch,
   form: {
     getFieldDecorator,
     validateFieldsAndScroll,
   },
 }) => {
-  const { loginLoading } = app
+  const { loginLoading } = login
 
   function handleOk () {
     validateFieldsAndScroll((errors, values) => {
       if (errors) {
         return
       }
-      dispatch({ type: 'app/login', payload: values })
+      dispatch({ type: 'login/login', payload: values })
     })
   }
 
@@ -34,7 +34,7 @@ const Login = ({
       </div>
       <form>
         <FormItem hasFeedback>
-          {getFieldDecorator('userName', {
+          {getFieldDecorator('username', {
             rules: [
               {
                 required: true,
@@ -68,8 +68,8 @@ const Login = ({
 
 Login.propTypes = {
   form: PropTypes.object,
-  app: PropTypes.object,
+  login: PropTypes.object,
   dispatch: PropTypes.func,
 }
 
-export default connect(({ app }) => ({ app }))(Form.create()(Login))
+export default connect(({ login }) => ({ login }))(Form.create()(Login))
