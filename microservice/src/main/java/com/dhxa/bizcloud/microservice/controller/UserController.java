@@ -32,10 +32,10 @@ public class UserController {
 	@CrossOrigin
 	public Object getDeptsPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
 			@RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
-			@RequestParam(name = "name", required = false) String name) {
-		log.info("parameters:pageSize={},pageNumber={},name={}", pageSize, pageNumber, name);
+			@RequestParam(name = "userName", required = false) String userName) {
+		log.info("parameters:pageSize={},pageNumber={},userName={}", pageSize, pageNumber, userName);
 		try {
-			Page<User> result = userService.findPageable(pageSize, pageNumber - 1, name);
+			Page<User> result = userService.findPageable(pageSize, pageNumber - 1, userName);
 			return ResponseUtil.makeSuccessResponse(result.getTotalElements(), result.getContent());
 		} catch (Exception e) {
 			log.error(e.getMessage());

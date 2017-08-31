@@ -34,12 +34,12 @@ public class UserController {
 	@CrossOrigin
 	public Object getUserPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
 			@RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
-			@RequestParam(name = "name", required = false) String name) {
-		logger.info("parameters:pageSize={},pageNumber={},name={}", pageSize, pageNumber, name);
+			@RequestParam(name = "userName", required = false) String userName) {
+		logger.info("parameters:pageSize={},pageNumber={},userName={}", pageSize, pageNumber, userName);
 		Subject subject = SecurityUtils.getSubject();
 		logger.info("sessionid user=" + subject.getSession().getId());
 
-		JSONObject jsonObject = userClient.getUserPageable(pageSize, pageNumber, name);
+		JSONObject jsonObject = userClient.getUserPageable(pageSize, pageNumber, userName);
 		if (jsonObject.getBooleanValue("success")) {
 			List<User> rows = jsonObject.getJSONObject("result").getJSONArray("rows").toJavaList(User.class);
 			return ResponseUtil.makeSuccessResponse(rows);

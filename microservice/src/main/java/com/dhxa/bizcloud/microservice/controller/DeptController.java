@@ -25,10 +25,10 @@ public class DeptController {
     @CrossOrigin
     public Object getDeptsPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
                                        @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
-                                       @RequestParam(name = "name", required = false) String name) {
-        logger.info("parameters:pageSize={},pageNumber={},name={}",pageSize,pageNumber,name);
+                                       @RequestParam(name = "deptName", required = false) String deptName) {
+        logger.info("parameters:pageSize={},pageNumber={},deptName={}",pageSize,pageNumber,deptName);
         try {
-            Page<Dept> result = deptService.findPageable(pageSize,pageNumber-1,name);
+            Page<Dept> result = deptService.findPageable(pageSize,pageNumber-1,deptName);
             return ResponseUtil.makeSuccessResponse(result.getTotalElements(), result.getContent());
         } catch (Exception e) {
             logger.error(e.getMessage());

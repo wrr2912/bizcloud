@@ -33,12 +33,12 @@ public class DeptController {
     @CrossOrigin
     public Object getDeptsPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
                                        @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
-                                       @RequestParam(name = "name", required = false) String name) {
-        logger.info("parameters:pageSize={},pageNumber={},name={}",pageSize,pageNumber,name);
+                                       @RequestParam(name = "deptName", required = false) String deptName) {
+        logger.info("parameters:pageSize={},pageNumber={},deptName={}",pageSize,pageNumber,deptName);
         Subject subject = SecurityUtils.getSubject();		
         logger.info("sessionid dept=" + subject.getSession().getId());
 		
-        JSONObject jsonObject = deptClient.getDeptPageable(pageSize, pageNumber, name);
+        JSONObject jsonObject = deptClient.getDeptPageable(pageSize, pageNumber, deptName);
         if(jsonObject.getBooleanValue("success")) {
         	List<Dept> rows = jsonObject.getJSONObject("result").getJSONArray("rows").toJavaList(Dept.class);
         	return ResponseUtil.makeSuccessResponse(rows);

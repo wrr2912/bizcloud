@@ -24,5 +24,5 @@ public interface DeptClient {
 
     @RequestMapping(method = { RequestMethod.GET }, value = "/dept/getPageable")
     JSONObject getDeptPageable(@RequestParam(name = "pageSize") int pageSize,@RequestParam(name = "pageNumber") int pageNumber,
-                                   @RequestParam(name = "name", required = false) String name);
+                                   @RequestParam(name = "deptName", required = false) String deptName);
 }

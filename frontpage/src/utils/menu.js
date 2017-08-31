@@ -22,8 +22,9 @@
   },
   {
     key: '2',
-    name: '系统管理',
-    icon: 'setting',
+    name: '单位管理',
+    icon: 'home',
+    link: '/dept/deptList',
     visible: true,
   }
 ]

@@ -33,5 +33,5 @@ public interface UserClient {
 	@RequestMapping(method = { RequestMethod.GET }, value = "/user/getPageable")
 	JSONObject getUserPageable(@RequestParam(name = "pageSize") int pageSize,
 			@RequestParam(name = "pageNumber") int pageNumber,
-			@RequestParam(name = "name", required = false) String name);
+			@RequestParam(name = "userName", required = false) String userName);
 }
