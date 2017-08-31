@@ -23,6 +23,15 @@ const Header = ({ user, logout, personal, switchSider, siderFold, isNavbar, menu
     navOpenKeys,
     changeOpenKeys,
   }
+  /*   {isNavbar
+       ? <Popover placement="bottomLeft" onVisibleChange={switchMenuPopover} visible={menuPopoverVisible} overlayClassName={styles.popovermenu} trigger="click" content={<Menus {...menusProps} />}>
+         <div className={styles.button}>
+           <Icon type="bars" />
+         </div>
+       </Popover>
+       : <div className={styles.button} onClick={switchSider}>
+         <Icon type={siderFold ? 'menu-unfold' : 'menu-fold'} />
+       </div>}*/
   return (
     <div className={styles.header}>
       {isNavbar
