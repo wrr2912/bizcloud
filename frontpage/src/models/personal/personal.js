@@ -6,7 +6,7 @@ export default {
   state: {
     userInfo: {
       userId: '012922',
-      userName: '张世同',
+      userName: 'admin',
     },
     favorites: [
 

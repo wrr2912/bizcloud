@@ -51,6 +51,17 @@ public class AuthApplicationReadyListener implements ApplicationListener<Applica
             userRepo.save(u);
         }
 
+        userName = "ajadmin";
+        u = userRepo.findByName(userName);
+        if( u == null){
+            u = new User();
+            u.setName(userName);
+            u.setDepartId("001");
+            u.setPassword("ajadmin");
+            u.setRealName("Ajadmin-User");
+            u.setUserRoles(new String[]{"SUPER_ADMIN"});
+            userRepo.save(u);
+        }
 
     }
 }
