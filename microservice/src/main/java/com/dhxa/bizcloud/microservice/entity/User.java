@@ -17,7 +17,7 @@ import javax.persistence.Column;
 public class User implements java.io.Serializable {
 
 	@Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy=GenerationType.AUTO)//AUTO主键由程序控制
     @Column(name = "USERID",insertable = true, updatable = true, nullable = false)
 	private Long userid;
 	

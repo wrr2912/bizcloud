@@ -192,6 +192,22 @@ const Routers = function ({ history, app }) {
               cb(null, require('./routes/dept/deptView/'))  //  加载指定的画面
             }, 'dept-deptView')
           },
+        }, {
+          path: 'personnel/personnelList',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/personnel/personnelList')) //  加载指定的model
+              cb(null, require('./routes/personnel/personnelList/'))  //  加载指定的画面
+            }, 'personnel-personnelList')
+          },
+        }, {
+          path: 'personnel/personnelView/:id',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/personnel/personnelView')) //  加载指定的model
+              cb(null, require('./routes/personnel/personnelView/'))  //  加载指定的画面
+            }, 'personnel-personnelView')
+          },
         },{
           path: 'user/userList',
           getComponent (nextState, cb) {

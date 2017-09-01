@@ -8,54 +8,59 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSONObject;
-import com.dhxa.bizcloud.appservice.client.system.DeptClient;
-import com.dhxa.bizcloud.appservice.common.utils.ResponseUtil;
-import com.dhxa.bizcloud.appservice.entity.system.Dept;
+import com.dhxa.bizcloud.appservice.client.PersonnelClient;
 import com.dhxa.bizcloud.appservice.common.message.SystemErrorCodeType;
+import com.dhxa.bizcloud.appservice.common.utils.ResponseUtil;
+import com.dhxa.bizcloud.appservice.entity.Personnel;
 import com.rayfay.bizcloud.core.commons.exception.NRAPException;
 
 @RestController
-@RequestMapping(value = "/dept")
-public class DeptController {
-    private Logger logger = LoggerFactory.getLogger(DeptController.class);
+@RequestMapping(value = "/personnel")
+public class PersonnelController {
+    private Logger logger = LoggerFactory.getLogger(PersonnelClient.class);
 
-    DeptClient deptClient;
+    PersonnelClient personnelClient;
 
     @Autowired
-    public DeptController(DeptClient deptClient){
-        this.deptClient = deptClient;
+    public PersonnelController(PersonnelClient personnelClient){
+        this.personnelClient = personnelClient;
     }
 
     @RequestMapping(value = "getPageable", method = RequestMethod.GET)
     @CrossOrigin
-    public Object getDeptsPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
+    public Object getPersonnelsPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
                                        @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
-                                       @RequestParam(name = "deptName", required = false) String deptName) {
-        logger.info("parameters:pageSize={},pageNumber={},deptName={}",pageSize,pageNumber,deptName);
+                                       @RequestParam(name = "name", required = false) String name) {
+        logger.info("parameters:pageSize={},pageNumber={},name={}",pageSize,pageNumber,name);
         Subject subject = SecurityUtils.getSubject();		
-        logger.info("sessionid dept=" + subject.getSession().getId());
+        logger.info("sessionid personnel=" + subject.getSession().getId());
 		
-        JSONObject jsonObject = deptClient.getDeptPageable(pageSize, pageNumber, deptName);
+        JSONObject jsonObject = personnelClient.getPersonnelPageable(pageSize, pageNumber, name);
+        System.out.println("----------------------------"+jsonObject);
         if(jsonObject.getBooleanValue("success")) {
-        	List<Dept> rows = jsonObject.getJSONObject("result").getJSONArray("rows").toJavaList(Dept.class);
+        	List<Personnel> rows = jsonObject.getJSONObject("result").getJSONArray("rows").toJavaList(Personnel.class);
+        	System.out.println("到这了----------------------------"+rows);
         	return ResponseUtil.makeSuccessResponse(rows);
         }else {
         	return ResponseUtil.makeErrorResponse(jsonObject.getString("errorCode"), jsonObject.getString("message"));
         }
-        //return "abc";
-
     }
     
     @RequestMapping(value = "get" , method = RequestMethod.GET)
     @CrossOrigin
-    public Object getDeptInfo(@RequestParam Long id){
-        logger.info("paras:id = {}", id);
-        JSONObject jsonObject = deptClient.findDeptById(id);
+    public Object getPersonnelInfo(@RequestParam Long personnelId){
+        logger.info("paras:id = {}", personnelId);
+        JSONObject jsonObject = personnelClient.findPersonnelById(personnelId);
         if(jsonObject.getBooleanValue("success")) {
-        	List<Dept> rows = jsonObject.getJSONObject("result").getJSONArray("rows").toJavaList(Dept.class);
+        	List<Personnel> rows = jsonObject.getJSONObject("result").getJSONArray("rows").toJavaList(Personnel.class);
         	return ResponseUtil.makeSuccessResponse(rows);
         }else {
         	return ResponseUtil.makeErrorResponse(jsonObject.getString("errorCode"), jsonObject.getString("message"));
@@ -65,9 +70,9 @@ public class DeptController {
     @RequestMapping(value = "add", method = RequestMethod.POST)
     @Transactional
     @CrossOrigin
-    public Object addDept(@RequestBody Dept data) {
+    public Object addPersonnel(@RequestBody Personnel data) {
         try {
-        	deptClient.addDept(data);
+        	personnelClient.addPersonnel(data);
             return  ResponseUtil.makeSuccessResponse();
         } catch (Exception e) {
             throw new NRAPException(SystemErrorCodeType.E_ACTION_FALED,e.getMessage()+"增加");
@@ -75,24 +80,23 @@ public class DeptController {
     }
     @RequestMapping(value = "update", method = RequestMethod.PUT)
     @CrossOrigin
-    public Object updateDept(@RequestBody Dept data) {
+    public Object updatePersonnel(@RequestBody Personnel data) {
         try {
-        	deptClient.updateDept(data);
+        	personnelClient.updatePersonnel(data);
             return  ResponseUtil.makeSuccessResponse();
         } catch (Exception e) {
             throw new NRAPException(SystemErrorCodeType.E_ACTION_FALED,e.getMessage()+"修改");
         }
     }
-
+    
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     @CrossOrigin
-    public Object delDept(@RequestParam Long id) {
+    public Object delPersonnel(@RequestBody Long id) {
     	try {
-    		deptClient.deleteDept(id);
+    		personnelClient.deletePersonnel(id);
             return  ResponseUtil.makeSuccessResponse();
         } catch (Exception e) {
             throw new NRAPException(SystemErrorCodeType.E_ACTION_FALED,e.getMessage()+"删除");
         }
     }
-
 }
