@@ -23,27 +23,27 @@ const DeptView = ({ dispatch, deptView }) => {
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          省份：{dept.sex !== null ? dept.province : <Icon type="loading" />}
+          省份：{dept.province !== null ? dept.province : <Icon type="loading" />}
         </Col>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          城市：{dept.sex !== null ? dept.city : <Icon type="loading" />}
+          城市：{dept.city !== null ? dept.city : <Icon type="loading" />}
         </Col>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          区域：{dept.sex !== null ? dept.country : <Icon type="loading" />}
+          区域：{dept.country !== null ? dept.country : <Icon type="loading" />}
         </Col>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          成立时间：{dept.sex !== null ? dept.createTime : <Icon type="loading" />}
+          成立时间：{dept.createTime !== null ? dept.createTime : <Icon type="loading" />}
         </Col>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          邮箱：{dept.sex !== null ? dept.email : <Icon type="loading" />}
+          邮箱：{dept.email !== null ? dept.email : <Icon type="loading" />}
         </Col>
       </Row>
       <Row gutter={24}>

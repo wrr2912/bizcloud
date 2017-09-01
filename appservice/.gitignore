@@ -1,1 +1,4 @@
-/target
+target
+.settings
+logs
+.classpath

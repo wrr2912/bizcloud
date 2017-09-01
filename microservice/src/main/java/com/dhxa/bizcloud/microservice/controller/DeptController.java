@@ -24,8 +24,8 @@ public class DeptController {
     @RequestMapping(value = "getPageable", method = RequestMethod.GET)
     @CrossOrigin
     public Object getDeptsPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
-                                       @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
-                                       @RequestParam(name = "name", required = false) String name) {
+                                   @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
+                                   @RequestParam(name = "name", required = false) String name) {
         logger.info("parameters:pageSize={},pageNumber={},name={}",pageSize,pageNumber,name);
         try {
             Page<Dept> result = deptService.findPageable(pageSize,pageNumber-1,name);
