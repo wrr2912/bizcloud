@@ -1,7 +1,7 @@
 module.exports = {
   name: 'Sample',
   prefix: 'antdAdmin',
-  footerText: 'Sample  © 2017 rayfay',
+  footerText: 'Copyright  © 北京鼎合信安科技有限公司',
   logo: '/logo.png',
   iconFontCSS: '/iconfont.css',
   iconFontJS: '/iconfont.js',

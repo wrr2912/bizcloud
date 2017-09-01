@@ -2,8 +2,8 @@ import React, { PropTypes } from 'react'
 import { connect } from 'dva'
 import { Col, Row, Button, Icon } from 'antd'
 
-const DeptView = ({ dispatch, deptView }) => {
-  const { dept } = deptView
+const UserView = ({ dispatch, userView }) => {
+  const { user } = userView
 
   const showCreateModal = () => {
     history.back()
@@ -13,37 +13,37 @@ const DeptView = ({ dispatch, deptView }) => {
     <div className="content-inner">
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          单位ID：{dept.id !== null ? dept.id : <Icon type="loading" />}
+          用户ID：{user.userid !== null ? user.userid : ''}
         </Col>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          单位名称：{dept.deptName !== null ? dept.deptName : <Icon type="loading" />}
+          用户名称：{user.name !== null ? user.username : ''}
         </Col>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          省份：{dept.province !== null ? dept.province : <Icon type="loading" />}
+          密码：{user.password !== null ? user.password : ''}
         </Col>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          城市：{dept.city !== null ? dept.city : <Icon type="loading" />}
+          用户类型：{user.truename !== null ? user.truename : ''}
         </Col>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          区域：{dept.country !== null ? dept.country : <Icon type="loading" />}
+          部门编号：{user.deptId !== null ? user.deptId : ''}
         </Col>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          成立时间：{dept.createTime !== null ? dept.createTime : <Icon type="loading" />}
+          电话：{user.phone !== null ? user.phone : ''}
         </Col>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          邮箱：{dept.email !== null ? dept.email : <Icon type="loading" />}
+          邮箱：{user.email !== null ? user.email : ''}
         </Col>
       </Row>
       <Row gutter={24}>
@@ -55,9 +55,9 @@ const DeptView = ({ dispatch, deptView }) => {
   )
 }
 
-DeptView.propTypes = {
+UserView.propTypes = {
   dispatch: PropTypes.func,
-    deptView: PropTypes.object,
+  userView: PropTypes.object,
 }
 
-export default connect(({ deptView }) => ({ deptView }))(DeptView)
+export default connect(({ userView }) => ({ userView }))(UserView)

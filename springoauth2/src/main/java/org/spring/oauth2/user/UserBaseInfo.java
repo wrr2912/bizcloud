@@ -1,6 +1,5 @@
 package org.spring.oauth2.user;
 
-import javax.persistence.Column;
 
 /**
  * Created by stzhang on 2016/9/21.

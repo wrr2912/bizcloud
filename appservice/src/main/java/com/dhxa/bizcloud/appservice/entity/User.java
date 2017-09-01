@@ -10,15 +10,15 @@ package com.dhxa.bizcloud.appservice.entity;
 public class User implements java.io.Serializable {
 
 	
-	private Long userid;
-	private String username;
-	private String password;
-	private String headimgurl;
-	private String isdelete;
-	private String truename;	
-	private Long deptId;
-	private String phone;
-	private String email;
+	private Long userid;//用户id
+	private String username;//用户名称
+	private String password;//用户密码
+	private String headimgurl;//头像URL
+	private String isdelete;//删除表示
+	private String truename;//姓名	
+	private Long deptId;//部门编码
+	private String phone;//电话
+	private String email;//邮箱
 
 	public User() {
 	}

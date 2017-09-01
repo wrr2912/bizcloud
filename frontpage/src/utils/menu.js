@@ -1,19 +1,27 @@
-module.exports = [
+﻿module.exports = [
   {
-    key: '7',
-    name: '单位',
-    icon: 'home',
-    link: '/dept/deptList',
+    key: '6',
+    name: '用户',
+    icon: 'user',
+    link: '/user/userList',
     visible: true,
   },
   {
-    key: '71',
-    name: '单位详细',
-    icon: 'home',
-    link: '/dept/deptView/:id',
+    key: '61',
+    name: '用户详细',
+    icon: 'user',
+    link: '/user/userView/:id',
     visible: false,
   },
   {
+    key: '1',
+    name: '主页',
+    icon: 'home',
+    link: '/dashboard',
+    visible: false,
+  },
+  {
+<<<<<<< HEAD
     key: '8',
     name: '人员',
     icon: 'home',
@@ -27,4 +35,12 @@ module.exports = [
     link: '/personnel/personnelView/:id',
     visible: false,
   },
+=======
+    key: '2',
+    name: '单位管理',
+    icon: 'home',
+    link: '/dept/deptList',
+    visible: true,
+  }
+>>>>>>> 56d41634ddd427a8b009c9b0330a3d01e65ec6b7
 ]
