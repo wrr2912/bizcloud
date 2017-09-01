@@ -91,7 +91,7 @@ public class PersonnelController {
 	}
 	@RequestMapping(value = "delete", method = RequestMethod.DELETE)
 	@CrossOrigin
-	public Object deletePersonnel(@RequestBody Long personnelId) {
+	public Object deletePersonnel(@RequestParam Long personnelId) {
 		try {
 			personnelService.delete(personnelId);
 			return ResponseUtil.makeSuccessResponse();

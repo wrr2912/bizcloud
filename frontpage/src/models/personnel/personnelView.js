@@ -19,7 +19,7 @@ export default {
         const match = pathToRegexp('/personnel/personnelView/:id').exec(location.pathname)
         if (match) {
           dispatch({
-            type: 'getpersonnel',
+            type: 'getPersonnel',
             payload: { id: match[1] },
           })
         }

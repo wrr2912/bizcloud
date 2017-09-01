@@ -91,9 +91,9 @@ public class PersonnelController {
     
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     @CrossOrigin
-    public Object delPersonnel(@RequestBody Long id) {
+    public Object delPersonnel(@RequestParam Long personnelId) {
     	try {
-    		personnelClient.deletePersonnel(id);
+    		personnelClient.deletePersonnel(personnelId);
             return  ResponseUtil.makeSuccessResponse();
         } catch (Exception e) {
             throw new NRAPException(SystemErrorCodeType.E_ACTION_FALED,e.getMessage()+"删除");
