@@ -23,14 +23,14 @@
   {
     key: '8',
     name: '人员',
-    icon: 'home',
+    icon: 'user',
     link: '/personnel/personnelList',
-    visible: false,
+    visible: true,
   },
   {
     key: '81',
     name: '人员信息',
-    icon: 'home',
+    icon: 'user',
     link: '/personnel/personnelView/:id',
     visible: false,
   },
@@ -61,7 +61,33 @@
     link: '/enterprise/enterpriseList',
     mpid: '3',
     visible: true,
-  }
+  },{
 
+    key: '9',
+    name: '部门',
+    icon: 'home',
+    link: '/department/departmentList',
+    visible: true,
+  },
+  {
+    key: '91',
+    name: '部门信息',
+    icon: 'home',
+    link: '/department/departmentView/:id',
+    visible: false,
+  },{
+    key:'10',
+    name:'监管机构管理',
+    icon:'home',
+    link:'/supervisionInstitution/supervisionInstitutionList',
+    visible:true,
+  },{
+    key:'101',
+    name:'监管机构信息',
+    icon:'home',
+    link:'/supervisionInstitution/supervisionInstitutionView/:id',
+    visible:false,
+  },
 ]
+
 

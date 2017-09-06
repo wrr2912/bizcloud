@@ -42,4 +42,19 @@ public class  SystemMessage {
 
 	
 	
+	public static final String M_PERSONNEL_CREATE="创建公共编码";
+	public static final String M_PERSONNEL_UPDATE="更新公共编码";
+	public static final String M_PERSONNEL_DELETE="删除公共编码";
+	public static final String M_PERSONNEL_FIND="获取公共编码";
+	public static final String M_PERSONNEL_FIND_BY_ID="根据公共编码ID获取公共编码信息";
+	public static final String M_PERSONNEL_FIND_PAGE_BY_QUERY="根据检索条件获取人员信息(分页)";
+	
+	public static final String C_PERSONNEL_NAME="人员姓名";
+	public static final String C_PERSONNEL_ID="人员ID";
+	//人员名称
+	public static final String E_PERSONNEL_NAME="personnelName";
+	//编码ID
+	public static final String E_PERSONNEL_ID="id";
+	
+	
 }

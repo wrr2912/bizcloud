@@ -25,7 +25,7 @@ import com.rayfay.bizcloud.core.commons.exception.NRAPException;
 @RestController
 @RequestMapping(value = "/personnel")
 public class PersonnelController {
-    private Logger logger = LoggerFactory.getLogger(PersonnelClient.class);
+    private Logger logger = LoggerFactory.getLogger(PersonnelController.class);
 
     PersonnelClient personnelClient;
 
@@ -38,16 +38,14 @@ public class PersonnelController {
     @CrossOrigin
     public Object getPersonnelsPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
                                        @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
-                                       @RequestParam(name = "name", required = false) String name) {
-        logger.info("parameters:pageSize={},pageNumber={},name={}",pageSize,pageNumber,name);
+                                       @RequestParam(name = "personnelName", required = false) String personnelName) {
+        logger.info("parameters:pageSize={},pageNumber={},personnelName={}",pageSize,pageNumber,personnelName);
         Subject subject = SecurityUtils.getSubject();		
         logger.info("sessionid personnel=" + subject.getSession().getId());
 		
-        JSONObject jsonObject = personnelClient.getPersonnelPageable(pageSize, pageNumber, name);
-        System.out.println("----------------------------"+jsonObject);
+        JSONObject jsonObject = personnelClient.getPersonnelPageable(pageSize, pageNumber, personnelName);
         if(jsonObject.getBooleanValue("success")) {
         	List<Personnel> rows = jsonObject.getJSONObject("result").getJSONArray("rows").toJavaList(Personnel.class);
-        	System.out.println("到这了----------------------------"+rows);
         	return ResponseUtil.makeSuccessResponse(rows);
         }else {
         	return ResponseUtil.makeErrorResponse(jsonObject.getString("errorCode"), jsonObject.getString("message"));
@@ -56,9 +54,9 @@ public class PersonnelController {
     
     @RequestMapping(value = "get" , method = RequestMethod.GET)
     @CrossOrigin
-    public Object getPersonnelInfo(@RequestParam Long personnelId){
-        logger.info("paras:id = {}", personnelId);
-        JSONObject jsonObject = personnelClient.findPersonnelById(personnelId);
+    public Object getPersonnelInfo(@RequestParam Long id){
+        logger.info("paras:id = {}", id);
+        JSONObject jsonObject = personnelClient.findPersonnelById(id);
         if(jsonObject.getBooleanValue("success")) {
         	List<Personnel> rows = jsonObject.getJSONObject("result").getJSONArray("rows").toJavaList(Personnel.class);
         	return ResponseUtil.makeSuccessResponse(rows);
@@ -91,9 +89,9 @@ public class PersonnelController {
     
     @RequestMapping(value = "delete", method = RequestMethod.DELETE)
     @CrossOrigin
-    public Object delPersonnel(@RequestParam Long personnelId) {
+    public Object delPersonnel(@RequestParam Long id) {
     	try {
-    		personnelClient.deletePersonnel(personnelId);
+    		personnelClient.deletePersonnel(id);
             return  ResponseUtil.makeSuccessResponse();
         } catch (Exception e) {
             throw new NRAPException(SystemErrorCodeType.E_ACTION_FALED,e.getMessage()+"删除");

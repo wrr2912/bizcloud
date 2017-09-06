@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alibaba.fastjson.JSONObject;
 import com.dhxa.bizcloud.appservice.entity.Personnel;
 
-@FeignClient(name = "MICRO-SERVICE-RR")
+@FeignClient(name = "MICRO-SERVICE")
 public interface PersonnelClient {
 	@RequestMapping(method = { RequestMethod.POST }, value = "/personnel/add")
 	JSONObject addPersonnel(@RequestBody Personnel personnel);
@@ -18,15 +18,15 @@ public interface PersonnelClient {
     JSONObject updatePersonnel(@RequestBody Personnel personnel);
 
     @RequestMapping(method = { RequestMethod.DELETE }, value = "/personnel/delete")
-    JSONObject deletePersonnel(@RequestParam(name = "personnelId") Long personnelId);
+    JSONObject deletePersonnel(@RequestParam(name = "id") Long id);
 
     @RequestMapping(method = { RequestMethod.GET }, value = "/personnel/get")
-    JSONObject findPersonnelById(@RequestParam(name = "personnelId") Long personnelId);
+    JSONObject findPersonnelById(@RequestParam(name = "id") Long id);
 
     @RequestMapping(method = { RequestMethod.GET }, value = "/personnel/getPageable")
     JSONObject getPersonnelPageable(@RequestParam(name = "pageSize") int pageSize,
     								@RequestParam(name = "pageNumber") int pageNumber,
-                                    @RequestParam(name = "name", required = false) String name);
+                                    @RequestParam(name = "personnelName", required = false) String personnelName);
     
     
     
