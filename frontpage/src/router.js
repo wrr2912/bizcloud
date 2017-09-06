@@ -29,7 +29,7 @@ const Routers = function ({ history, app }) {
               cb(null, require('./routes/dashboard/'))
             }, 'dashboard')
           },
-        }, {
+        }/*, {
           path: 'user',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
@@ -37,7 +37,7 @@ const Routers = function ({ history, app }) {
               cb(null, require('./routes/user/'))
             }, 'user')
           },
-        }, {
+        }, *//*{
           path: 'user/:id',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
@@ -45,7 +45,7 @@ const Routers = function ({ history, app }) {
               cb(null, require('./routes/user/detail/'))
             }, 'user-detail')
           },
-        }, {
+        }*/, {
           path: 'user_role',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
@@ -191,6 +191,54 @@ const Routers = function ({ history, app }) {
               registerModel(app, require('./models/dept/deptView')) //  加载指定的model
               cb(null, require('./routes/dept/deptView/'))  //  加载指定的画面
             }, 'dept-deptView')
+          },
+        }, {
+          path: 'personnel/personnelList',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/personnel/personnelList')) //  加载指定的model
+              cb(null, require('./routes/personnel/personnelList/'))  //  加载指定的画面
+            }, 'personnel-personnelList')
+          },
+        }, {
+          path: 'personnel/personnelView/:id',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/personnel/personnelView')) //  加载指定的model
+              cb(null, require('./routes/personnel/personnelView/'))  //  加载指定的画面
+            }, 'personnel-personnelView')
+          },
+        },{
+          path: 'user/userList',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/user/userList')) //  加载用户模块指定的model
+              cb(null, require('./routes/user/userList/'))  //  加载用户模块指定的画面
+            }, 'user-userList')
+          },
+        }, {
+          path: 'user/userView/:id',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/user/userView')) //  加载用户模块指定的model
+              cb(null, require('./routes/user/userView/'))  //  加载用户模块指定的画面
+            }, 'user-userView')
+          },
+        },{
+          path: 'enterprise/enterpriseList',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/enterprise/enterpriseList')) //  加载指定的model
+              cb(null, require('./routes/enterprise/enterpriseList/'))  //  加载指定的画面
+            }, 'enterprise-enterpriseList')
+          },
+        }, {
+          path: 'enterprise/enterpriseView/:id',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/enterprise/enterpriseView')) //  加载指定的model
+              cb(null, require('./routes/enterprise/enterpriseView/'))  //  加载指定的画面
+            }, 'enterprise-enterpriseView')
           },
         },{
           path: '*',

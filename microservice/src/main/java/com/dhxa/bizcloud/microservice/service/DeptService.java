@@ -39,7 +39,7 @@ public class DeptService {
         return deptRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (StringUtils.isNotBlank(deptname)) {
-                predicates.add(criteriaBuilder.like(root.get("deptname"), "%" + deptname + "%"));
+                predicates.add(criteriaBuilder.like(root.get("deptName"), deptname));
             }
             return criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
         }, pageRequest);
