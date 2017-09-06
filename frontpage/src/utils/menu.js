@@ -62,6 +62,13 @@
     mpid: '3',
     visible: true,
   },{
+    key:'32',
+    name:'监管机构管理',
+    icon:'home',
+    mpid: '3',
+    link:'/supervisionInstitution/supervisionInstitutionList',
+    visible:true,
+  },{
 
     key: '9',
     name: '部门',
@@ -75,12 +82,6 @@
     icon: 'home',
     link: '/department/departmentView/:id',
     visible: false,
-  },{
-    key:'10',
-    name:'监管机构管理',
-    icon:'home',
-    link:'/supervisionInstitution/supervisionInstitutionList',
-    visible:true,
   },{
     key:'101',
     name:'监管机构信息',
