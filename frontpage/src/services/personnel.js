@@ -38,7 +38,7 @@ export async function updatePersonnel (params) {
 
 export async function deletePersonnel (params) {
   return request({
-    url: `${serviceDomain}/personnel/delete?personnelId=${params.id}`,
+    url: `${serviceDomain}/personnel/delete?id=${params.id}`,
     method: 'DELETE',
     withCredential: true,
   })
@@ -46,7 +46,7 @@ export async function deletePersonnel (params) {
 
 export async function getPersonnel (params) {
   return request({
-    url: `${serviceDomain}/personnel/get?personnelId=${params.id}`,
+    url: `${serviceDomain}/personnel/get?id=${params.id}`,
     method: 'GET',
     withCredential: true,
   })

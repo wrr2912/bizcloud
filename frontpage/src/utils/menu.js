@@ -25,7 +25,7 @@
     name: '人员',
     icon: 'user',
     link: '/personnel/personnelList',
-    visible: false,
+    visible: true,
   },
   {
     key: '81',
