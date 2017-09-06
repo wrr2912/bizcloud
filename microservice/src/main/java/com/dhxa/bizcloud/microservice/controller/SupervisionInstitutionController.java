@@ -27,21 +27,6 @@ import com.rayfay.bizcloud.core.commons.exception.NRAPException;
 public class SupervisionInstitutionController {
 	private Logger logger = LoggerFactory.getLogger(SupervisionInstitutionController.class);
 	
-/*	@RequestMapping(value = "getPageable", method = RequestMethod.GET)
-	@CrossOrigin
-	public Object getSupervisionInstitutionPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
-													@RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
-													@RequestParam(name = "untiName", required = false) String unitName) {
-		logger.info("parameters:pageSize={},pageNumber={},unitName={}",pageSize,pageNumber,unitName);
-		 try {
-	            Page<SupervisionInstitution> result = supervisionInstitutionService.findPageable(pageSize, pageNumber-1, unitName);
-	            return ResponseUtil.makeSuccessResponse(result.getTotalElements(), result.getContent());
-	        } catch (Exception e) {
-	            logger.error(e.getMessage());
-	            throw new NRAPException(SystemErrorCodeType.E_GET_DATA_FALED);
-	        }
-	}*/
-	
 	@RequestMapping(value = "getPageable", method = RequestMethod.GET)
     @CrossOrigin
     public Object getDeptsPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
