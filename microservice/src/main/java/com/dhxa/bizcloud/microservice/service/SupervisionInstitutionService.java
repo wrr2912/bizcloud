@@ -28,15 +28,16 @@ public class SupervisionInstitutionService {
 	public SupervisionInstitution findOne(Long SIId) {
 		return supervisionInstitutionRepository.findOne(SIId);
 	}
-	public Page<SupervisionInstitution> findPageable(int pageSize,int pageNumber,String unitName) {
-		PageRequest pageRequest = new PageRequest(pageSize,pageNumber);
-		
-		return supervisionInstitutionRepository.findAll((root, criteriaQuery, criteriaBuilder)->{
-			List<Predicate> predicates = new ArrayList<>();
+	
+	public Page<SupervisionInstitution> findPageable(int pageSize, int pageNumber, String unitName)
+    {
+        PageRequest pageRequest = new PageRequest(pageNumber,pageSize);
+        return supervisionInstitutionRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
             if (StringUtils.isNotBlank(unitName)) {
-             //   predicates.add(criteriaBuilder.like(root.get("unitName"), "%" + unitName + "%"));
+                predicates.add(criteriaBuilder.like(root.get("unitName"), unitName));
             }
             return criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
-		},pageRequest);
-	}
+        }, pageRequest);
+    }
 }
