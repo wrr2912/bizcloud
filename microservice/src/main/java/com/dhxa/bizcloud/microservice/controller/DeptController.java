@@ -1,8 +1,8 @@
 package com.dhxa.bizcloud.microservice.controller;
 
 import com.dhxa.bizcloud.microservice.entity.Dept;
-import com.dhxa.bizcloud.microservice.message.SystemErrorCodeType;
 import com.dhxa.bizcloud.microservice.message.SystemMessage;
+import com.dhxa.bizcloud.microservice.message.SystemErrorCodeType;
 import com.dhxa.bizcloud.microservice.service.DeptService;
 import com.dhxa.bizcloud.microservice.utils.ResponseUtil;
 import com.rayfay.bizcloud.core.commons.exception.NRAPException;

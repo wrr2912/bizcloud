@@ -4,7 +4,7 @@
     name: '用户',
     icon: 'user',
     link: '/user/userList',
-    visible: true,
+    visible: false,
   },
   {
     key: '61',
@@ -25,7 +25,7 @@
     name: '人员',
     icon: 'home',
     link: '/personnel/personnelList',
-    visible: true,
+    visible: false,
   },
   {
     key: '81',
@@ -36,10 +36,32 @@
   },
   {
     key: '2',
+    name: '系统管理',
+    icon: 'home',
+    visible: true,
+  },
+  {
+    key: '21',
     name: '单位管理',
     icon: 'home',
     link: '/dept/deptList',
+    mpid: '2',
     visible: true,
   },
-  ]
+  {
+    key: '3',
+    name: '企业信息管理',
+    icon: 'home',
+    visible: true,
+  },
+  {
+    key: '31',
+    name: '企业基本信息管理',
+    icon: 'home',
+    link: '/enterprise/enterpriseList',
+    mpid: '3',
+    visible: true,
+  }
+
+]
 

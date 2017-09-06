@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dhxa.bizcloud.appservice.entity.system.Dept;
-@FeignClient(name = "MICRO-SERVICE")
+@FeignClient(name = "MICRO-SERVICE-RR")
 public interface DeptClient {
     @RequestMapping(method = { RequestMethod.POST }, value = "/dept/add")
     JSONObject addDept(@RequestBody Dept dept);
