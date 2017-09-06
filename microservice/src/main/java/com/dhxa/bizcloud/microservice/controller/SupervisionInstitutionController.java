@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.dhxa.bizcloud.microservice.entity.Dept;
 import com.dhxa.bizcloud.microservice.entity.SupervisionInstitution;
 import com.dhxa.bizcloud.microservice.message.SystemErrorCodeType;
 import com.dhxa.bizcloud.microservice.service.SupervisionInstitutionService;
@@ -26,7 +27,7 @@ import com.rayfay.bizcloud.core.commons.exception.NRAPException;
 public class SupervisionInstitutionController {
 	private Logger logger = LoggerFactory.getLogger(SupervisionInstitutionController.class);
 	
-	@RequestMapping(value = "getPageable", method = RequestMethod.GET)
+/*	@RequestMapping(value = "getPageable", method = RequestMethod.GET)
 	@CrossOrigin
 	public Object getSupervisionInstitutionPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
 													@RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
@@ -39,7 +40,22 @@ public class SupervisionInstitutionController {
 	            logger.error(e.getMessage());
 	            throw new NRAPException(SystemErrorCodeType.E_GET_DATA_FALED);
 	        }
-	}
+	}*/
+	
+	@RequestMapping(value = "getPageable", method = RequestMethod.GET)
+    @CrossOrigin
+    public Object getDeptsPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
+                                       @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
+                                       @RequestParam(name = "unitName", required = false) String unitName) {
+        logger.info("parameters:pageSize={},pageNumber={},unitName={}",pageSize,pageNumber,unitName);
+        try {
+            Page<SupervisionInstitution> result = supervisionInstitutionService.findPageable(pageSize,pageNumber-1,unitName);
+            return ResponseUtil.makeSuccessResponse(result.getTotalElements(), result.getContent());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NRAPException(SystemErrorCodeType.E_GET_DATA_FALED);
+        }
+    }
 	@Autowired
 	private SupervisionInstitutionService supervisionInstitutionService;
 	

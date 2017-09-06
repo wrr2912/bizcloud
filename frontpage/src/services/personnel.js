@@ -8,7 +8,7 @@ export async function getPersonnelTableDataSource (params) {
 
   let url = `${serviceDomain}/personnel/getPageable?pageNumber=${currentPage}&pageSize=${pageSize}`
   if (params.txtPersonnelName) {
-    url += `&personnelname=${params.txtPersonnelName}`
+    url += `&personnelName=${params.txtPersonnelName}`
   }
 
   return request({

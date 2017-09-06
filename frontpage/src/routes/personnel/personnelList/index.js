@@ -46,7 +46,7 @@ const PersonnelList = ({ location, dispatch, personnelList, loading, app }) => {
 
   const onClick = () => {
     dispatch({
-      type: 'personnelList/getPersnnelTableDataSource',
+      type: 'personnelList/getPersonnelTableDataSource',
       payload: {
         txtPersonnelName,
       },

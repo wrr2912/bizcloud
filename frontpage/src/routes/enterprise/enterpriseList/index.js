@@ -76,7 +76,7 @@ const EnterpriseList = ({ location, dispatch, enterpriseList, loading, app }) =>
     dispatch,
     editObj,
     title:modalTitle,
-    width: 1000,
+    width: '80%',
   }
 
   const showCreateModal = () => {
