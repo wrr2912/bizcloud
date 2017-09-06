@@ -35,7 +35,7 @@ public class PersonnelService {
 		return personnelRepository.findAll((root, criteriaQuery, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
             if (StringUtils.isNotBlank(personnelname)) {
-                predicates.add(criteriaBuilder.like(root.get("personnelname"), "%" + personnelname + "%"));
+                predicates.add(criteriaBuilder.like(root.get("personnelName"), "%" + personnelname + "%"));
             }
             return criteriaQuery.where(predicates.toArray(new Predicate[predicates.size()])).getRestriction();
         }, pageRequest);	
