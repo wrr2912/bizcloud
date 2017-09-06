@@ -209,6 +209,22 @@ const Routers = function ({ history, app }) {
             }, 'personnel-personnelView')
           },
         },{
+          path: 'department/departmentList',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/department/departmentList')) //  加载指定的model
+              cb(null, require('./routes/department/departmentList/'))  //  加载指定的画面
+            }, 'department-departmentList')
+          },
+        }, {
+          path: 'department/departmentView/:id',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/department/departmentView')) //  加载指定的model
+              cb(null, require('./routes/department/departmentView/'))  //  加载指定的画面
+            }, 'department-departmentView')
+          },
+        },{
           path: 'user/userList',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
@@ -223,6 +239,22 @@ const Routers = function ({ history, app }) {
               registerModel(app, require('./models/user/userView')) //  加载用户模块指定的model
               cb(null, require('./routes/user/userView/'))  //  加载用户模块指定的画面
             }, 'user-userView')
+          },
+        }, {
+          path: 'supervisionInstitution/supervisionInstitutionList',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/supervisionInstitution/supervisionInstitutionList')) //  加载指定的model
+              cb(null, require('./routes/supervisionInstitution/supervisionInstitutionList/'))  //  加载指定的画面
+            }, 'supervisionInstitution-supervisionInstitutionList')
+          },
+        }, {
+          path: 'supervisionInstitution/supervisionInstitutionView/:id',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/supervisionInstitution/supervisionInstitutionView')) //  加载指定的model
+              cb(null, require('./routes/supervisionInstitution/supervisionInstitutionView/'))  //  加载指定的画面
+            }, 'supervisionInstitution-supervisionInstitutionView')
           },
         },{
           path: '*',

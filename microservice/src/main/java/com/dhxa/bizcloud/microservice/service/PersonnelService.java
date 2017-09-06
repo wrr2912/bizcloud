@@ -25,7 +25,7 @@ public class PersonnelService {
 	public void delete(Long id) {
 		personnelRepository.delete(id);
 	}
-	public Personnel findOne(long id) {
+	public Personnel findOne(Long id) {
 		
 		return personnelRepository.findOne(id);
 	}

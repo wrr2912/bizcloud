@@ -13,16 +13,16 @@ const formItemLayout = {
   },
 }
 
-const PersonnelCreateModel = ({
-                           onOk,
-                           form: {
-                             getFieldDecorator,
-                             validateFields,
-                             getFieldsValue,
-                           },
-                           ...modalProps,
-                           editObj,
-                         }) => {
+const DepartmentCreateModel = ({
+                                onOk,
+                                form: {
+                                  getFieldDecorator,
+                                  validateFields,
+                                  getFieldsValue,
+                                },
+                                ...modalProps,
+                                editObj,
+                              }) => {
   const handleOk = () => {
     validateFields((errors) => {
       if (errors) {
@@ -32,15 +32,15 @@ const PersonnelCreateModel = ({
       let data
       if (editObj === null) {
         data = {
-          personnel: {
+          department: {
             ...getFieldsValue(),
           },
           isCreate: true,
         }
       } else {
         data = {
-          personnel: {
-            personnelId: editObj.personnelId,
+          department: {
+            departmentId: editObj.departmentId,
             ...getFieldsValue(),
           },
           isCreate: false,
@@ -52,11 +52,11 @@ const PersonnelCreateModel = ({
   }
 
   return (
-    <Modal {...modalProps} onOk={handleOk} okText="保存" title="新增人员">
+    <Modal {...modalProps} onOk={handleOk} okText="保存" title="添加部门">
       <Form layout="horizontal">
-        <FormItem label="姓名" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('personnelName', {
-            initialValue: editObj !== null ? editObj.personnelName : '',
+        <FormItem label="部门名称" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('departmentName', {
+            initialValue: editObj !== null ? editObj.departmentName : '',
             rules: [
               {
                 required: true,
@@ -72,14 +72,9 @@ const PersonnelCreateModel = ({
           })(<Input />)}
         </FormItem>
 
-        <FormItem label="年龄" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('personnelAge', {
-            initialValue: editObj !== null ? editObj.personnelAge : '',
-          })(<Input />)}
-        </FormItem>
-        <FormItem label="性别" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('personnelGender', {
-            initialValue: editObj !== null ? editObj.personnelGender : '',
+        <FormItem label="部门人数" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('sectorNumber', {
+            initialValue: editObj !== null ? editObj.sectorNumber : '',
           })(<Input />)}
         </FormItem>
       </Form>
@@ -87,11 +82,11 @@ const PersonnelCreateModel = ({
   )
 }
 
-PersonnelCreateModel.propTypes = {
+DepartmentCreateModel.propTypes = {
   onOk: PropTypes.func.isRequired,
   form: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   editObj: PropTypes.object,
 }
 
-export default Form.create()(PersonnelCreateModel)
+export default Form.create()(DepartmentCreateModel)

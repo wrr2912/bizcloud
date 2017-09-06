@@ -1,10 +1,10 @@
 import pathToRegexp from 'path-to-regexp'
-import { getPersonnel } from '../../services/personnel'
+import { getSupervisionInstitution } from '../../services/supervisionInstitution'
 
 export default {
-  namespace: 'personnelView',
+  namespace: 'supervisionInstitutionView',
   state: {
-    personnel: {
+    supervisionInstitution: {
       id: null,
       name: null,
       sex: null,
@@ -16,10 +16,10 @@ export default {
   subscriptions: {
     setup ({ dispatch, history }) {
       history.listen((location) => {
-        const match = pathToRegexp('/personnel/personnelView/:id').exec(location.pathname)
+        const match = pathToRegexp('/supervisionInstitution/supervisionInstitutionView/:id').exec(location.pathname)
         if (match) {
           dispatch({
-            type: 'getPersonnel',
+            type: 'getSupervisionInstitution',
             payload: { id: match[1] },
           })
         }
@@ -28,13 +28,13 @@ export default {
   },
 
   effects: {
-    * getPersonnel ({ payload }, { call, put }) {
-      const data = yield call(getPersonnel, payload)  // 调用远程服务获取结果
+    * getSupervisionInstitution ({ payload }, { call, put }) {
+      const data = yield call(getSupervisionInstitution, payload)  // 调用远程服务获取结果
       if (data.success) { // 判断获取结果是否成功
         yield put({
-          type: 'getPersonnelSuccess',
+          type: 'getSupervisionInstitutionSuccess',
           payload: {
-            personnel: data.rows[0],
+            supervisionInstitution: data.rows[0],
           },
         })  // 将返回结果赋值给state
       } else {
@@ -45,7 +45,7 @@ export default {
   },
 
   reducers: {
-    getPersonnelSuccess (state, action) {
+    getSupervisionInstitutionSuccess (state, action) {
       return {
         ...state,
         ...action.payload,

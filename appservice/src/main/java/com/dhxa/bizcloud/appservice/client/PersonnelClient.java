@@ -26,7 +26,7 @@ public interface PersonnelClient {
     @RequestMapping(method = { RequestMethod.GET }, value = "/personnel/getPageable")
     JSONObject getPersonnelPageable(@RequestParam(name = "pageSize") int pageSize,
     								@RequestParam(name = "pageNumber") int pageNumber,
-                                    @RequestParam(name = "name", required = false) String name);
+                                    @RequestParam(name = "personnelName", required = false) String personnelName);
     
     
     

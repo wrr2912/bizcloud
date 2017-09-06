@@ -60,7 +60,7 @@ export default {
         if (location.pathname === '/dashboard') {
           from = '/dashboard'
         };
-       window.location = `${location.origin}/login?from=${from}`
+      // window.location = `${location.origin}/login?from=${from}`
       }
     },
 
