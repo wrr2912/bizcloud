@@ -48,7 +48,7 @@ const PersonnelList = ({ location, dispatch, personnelList, loading, app }) => {
     dispatch({
       type: 'personnelList/getPersnnelTableDataSource',
       payload: {
-        txtPeresonnelName,
+        txtPersonnelName,
       },
     })
   }
