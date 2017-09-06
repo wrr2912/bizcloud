@@ -15,15 +15,15 @@ const formItemLayout = {
 }
 
 const EnterpriseCreateModal = ({
-                               onOk,
-                               form: {
-                                 getFieldDecorator,
-                                 validateFields,
-                                 getFieldsValue,
-                               },
-                               ...modalProps,
-                               editObj,
-                             }) => {
+                                 onOk,
+                                 form: {
+                                   getFieldDecorator,
+                                   validateFields,
+                                   getFieldsValue,
+                                 },
+                                 ...modalProps,
+                                 editObj,
+                               }) => {
   const handleOk = () => {
     validateFields((errors) => {
       if (errors) {
@@ -33,7 +33,7 @@ const EnterpriseCreateModal = ({
       let data
       if (editObj === null) {
         data = {
-            enterprise: {
+          enterprise: {
             ...getFieldsValue(),
           },
           isCreate: true,
@@ -56,7 +56,7 @@ const EnterpriseCreateModal = ({
     <Modal {...modalProps} onOk={handleOk} okText="保存">
       <Form layout="horizontal">
         <Row>
-          <Col span={8}>
+          <Col span={12}>
             <FormItem label="企业名称" hasFeedback {...formItemLayout}>
               {getFieldDecorator('enterprise_name', {
                 initialValue: editObj !== null ? editObj.enterprise_name : '',
@@ -75,60 +75,23 @@ const EnterpriseCreateModal = ({
               })(<Input />)}
             </FormItem>
           </Col>
-          <Col span={8}>
-            <FormItem label="成立时间" hasFeedback {...formItemLayout}>
-              {getFieldDecorator('founding_time', {
-                initialValue: editObj !== null ? moment(new Date(editObj.founding_time).format("yyyy-MM-dd hh:mm:ss")) : '',
-              })(<DatePicker />)}
-            </FormItem>
-          </Col>
-          <Col span={8}>
-            <FormItem label="注册地址" hasFeedback {...formItemLayout}>
-              {getFieldDecorator('register_address', {
-                initialValue: editObj !== null ? editObj.register_address : '',
-              })(<Input />)}
-            </FormItem>
-          </Col>
-        </Row>
-        <Row>
-          <Col span = {8}>
-            <FormItem label="生产地址" hasFeedback {...formItemLayout}>
-              {getFieldDecorator('manufacturer_address', {
-                initialValue: editObj !== null ? editObj.manufacturer_address : '',
-              })(<Input />)}
-            </FormItem>
-          </Col>
-          <Col span = {8}>
-            <FormItem label="产品类别" hasFeedback {...formItemLayout}>
-              {getFieldDecorator('product_category', {
-                initialValue: editObj !== null ? editObj.product_category : '',
-              })(<Input />)}
-            </FormItem>
-          </Col>
-          <Col span = {8}>
-            <FormItem label="地方局" hasFeedback {...formItemLayout}>
-              {getFieldDecorator('local_bureau', {
-                initialValue: editObj !== null ? editObj.local_bureau : '',
-              })(<Input />)}
-            </FormItem>
-          </Col>
-        </Row>
-        <Row>
-          <Col span = {8}>
+          <Col span = {12}>
             <FormItem label="企业类型" hasFeedback {...formItemLayout}>
               {getFieldDecorator('enterprise_type', {
                 initialValue: editObj !== null ? editObj.enterprise_type : '',
               })(<Input />)}
             </FormItem>
           </Col>
-          <Col span = {8}>
-            <FormItem label="行政许可类别统计" hasFeedback {...formItemLayout}>
-              {getFieldDecorator('administrative_licensing_statistics', {
-                initialValue: editObj !== null ? editObj.administrative_licensing_statistics : '',
-              })(<Input />)}
+        </Row>
+        <Row>
+          <Col span={12}>
+            <FormItem label="成立时间" hasFeedback {...formItemLayout}>
+              {getFieldDecorator('founding_time', {
+                initialValue: editObj !== null ? moment(new Date(editObj.founding_time).format("yyyy-MM-dd hh:mm:ss")) : '',
+              })(<DatePicker />)}
             </FormItem>
           </Col>
-          <Col span = {8}>
+          <Col span = {12}>
             <FormItem label="邮政编码" hasFeedback {...formItemLayout}>
               {getFieldDecorator('postal_code', {
                 initialValue: editObj !== null ? editObj.postal_code : '',
@@ -137,21 +100,46 @@ const EnterpriseCreateModal = ({
           </Col>
         </Row>
         <Row>
-          <Col span = {8}>
+          <Col span={12}>
+            <FormItem label="注册地址" hasFeedback {...formItemLayout}>
+              {getFieldDecorator('register_address', {
+                initialValue: editObj !== null ? editObj.register_address : '',
+              })(<Input />)}
+            </FormItem>
+          </Col>
+          <Col span = {12}>
             <FormItem label="联系人" hasFeedback {...formItemLayout}>
               {getFieldDecorator('contacts', {
                 initialValue: editObj !== null ? editObj.contacts : '',
               })(<Input />)}
             </FormItem>
           </Col>
-          <Col span = {8}>
+        </Row>
+        <Row>
+          <Col span = {12}>
+            <FormItem label="生产地址" hasFeedback {...formItemLayout}>
+              {getFieldDecorator('manufacturer_address', {
+                initialValue: editObj !== null ? editObj.manufacturer_address : '',
+              })(<Input />)}
+            </FormItem>
+          </Col>
+          <Col span = {12}>
             <FormItem label="联系电话" hasFeedback {...formItemLayout}>
               {getFieldDecorator('contact_number', {
                 initialValue: editObj !== null ? editObj.contact_number : '',
               })(<Input />)}
             </FormItem>
           </Col>
-          <Col span = {8}>
+        </Row>
+        <Row>
+          <Col span = {12}>
+            <FormItem label="法人代表" hasFeedback {...formItemLayout}>
+              {getFieldDecorator('legal_representative', {
+                initialValue: editObj !== null ? editObj.legal_representative : '',
+              })(<Input />)}
+            </FormItem>
+          </Col>
+          <Col span = {12}>
             <FormItem label="传真" hasFeedback {...formItemLayout}>
               {getFieldDecorator('fax', {
                 initialValue: editObj !== null ? editObj.fax : '',
@@ -160,21 +148,14 @@ const EnterpriseCreateModal = ({
           </Col>
         </Row>
         <Row>
-          <Col span = {8}>
+          <Col span = {12}>
             <FormItem label="企业性质" hasFeedback {...formItemLayout}>
               {getFieldDecorator('enterprise_nature', {
                 initialValue: editObj !== null ? editObj.enterprise_nature : '',
               })(<Input />)}
             </FormItem>
           </Col>
-          <Col span = {8}>
-            <FormItem label="法人代表" hasFeedback {...formItemLayout}>
-              {getFieldDecorator('legal_representative', {
-                initialValue: editObj !== null ? editObj.legal_representative : '',
-              })(<Input />)}
-            </FormItem>
-          </Col>
-          <Col span = {8}>
+          <Col span = {12}>
             <FormItem label="注册资金" hasFeedback {...formItemLayout}>
               {getFieldDecorator('register_capital', {
                 initialValue: editObj !== null ? editObj.register_capital : '',
@@ -183,14 +164,39 @@ const EnterpriseCreateModal = ({
           </Col>
         </Row>
         <Row>
-          <Col span = {8}>
+          <Col span = {12}>
             <FormItem label="企业职工" hasFeedback {...formItemLayout}>
               {getFieldDecorator('staff_number', {
                 initialValue: editObj !== null ? editObj.staff_number : '',
               })(<Input />)}
             </FormItem>
           </Col>
-          <Col span = {16}>
+          <Col span = {12}>
+            <FormItem label="地方局" hasFeedback {...formItemLayout}>
+              {getFieldDecorator('local_bureau', {
+                initialValue: editObj !== null ? editObj.local_bureau : '',
+              })(<Input />)}
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span = {12}>
+            <FormItem label="产品类别" hasFeedback {...formItemLayout}>
+              {getFieldDecorator('product_category', {
+                initialValue: editObj !== null ? editObj.product_category : '',
+              })(<Input />)}
+            </FormItem>
+          </Col>
+          <Col span = {12}>
+            <FormItem label="行政许可类别统计" hasFeedback {...formItemLayout}>
+              {getFieldDecorator('administrative_licensing_statistics', {
+                initialValue: editObj !== null ? editObj.administrative_licensing_statistics : '',
+              })(<Input />)}
+            </FormItem>
+          </Col>
+        </Row>
+        <Row>
+          <Col span = {24}>
             <FormItem label="备注" hasFeedback {...formItemLayout}>
               {getFieldDecorator('legal_representative', {
                 initialValue: editObj !== null ? editObj.legal_representative : '',
