@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.dhxa.bizcloud.microservice.entity.Personnel;
 import com.dhxa.bizcloud.microservice.message.SystemErrorCodeType;
 import com.dhxa.bizcloud.microservice.message.SystemMessage;
-import com.dhxa.bizcloud.microservice.service.DeptService;
 import com.dhxa.bizcloud.microservice.service.PersonnelService;
 import com.dhxa.bizcloud.microservice.utils.ResponseUtil;
 import com.rayfay.bizcloud.core.commons.exception.NRAPException;

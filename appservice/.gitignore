@@ -1,4 +1,6 @@
 target
-.settings
-logs
 .classpath
+logs
+.idea
+.settings
+*.iml

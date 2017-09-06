@@ -257,6 +257,22 @@ const Routers = function ({ history, app }) {
             }, 'supervisionInstitution-supervisionInstitutionView')
           },
         },{
+          path: 'enterprise/enterpriseList',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/enterprise/enterpriseList')) //  加载指定的model
+              cb(null, require('./routes/enterprise/enterpriseList/'))  //  加载指定的画面
+            }, 'enterprise-enterpriseList')
+          },
+        }, {
+          path: 'enterprise/enterpriseView/:id',
+          getComponent (nextState, cb) {
+            require.ensure([], (require) => {
+              registerModel(app, require('./models/enterprise/enterpriseView')) //  加载指定的model
+              cb(null, require('./routes/enterprise/enterpriseView/'))  //  加载指定的画面
+            }, 'enterprise-enterpriseView')
+          },
+        },{
           path: '*',
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
