@@ -18,13 +18,21 @@ public interface SupervisionInstitutionClient {
 	JSONObject updataSupervisionInstitution(@RequestBody SupervisionInstitution supervisionInstitution);
 	
 	@RequestMapping(method = { RequestMethod.DELETE }, value = "/supervisionInstitution/delete")
-	JSONObject deleteSupervisionInstitution(@RequestParam(name = "SIId") Long SIId);
+	JSONObject deleteSupervisionInstitution(@RequestParam(name = "id") Long id);
 	
 	@RequestMapping(method = { RequestMethod.GET }, value = "/supervisionInstitution/get")
-	JSONObject findSupervisionInstitutionById(@RequestParam(name = "SIId") Long SIId);
+	JSONObject findSupervisionInstitutionById(@RequestParam(name = "id") Long id);
 	
 	@RequestMapping(method = { RequestMethod.GET }, value = "/supervisionInstitution/getPageable")
 	JSONObject getSupervisionInstitutionPageable(@RequestParam(name = "pageSize")int pageSize,
 												 @RequestParam(name = "pageNumber")int pageNumber,
-												 @RequestParam(name = "unitName",required = false) String unitName);
+												 @RequestParam(name = "unitName",required = false) String unitName,
+												 @RequestParam(name = "supervision",required = false) String supervision,
+												 @RequestParam(name = "prefectureSupervision",required = false) String prefectureSupervision,
+												 @RequestParam(name = "qualitySupervision",required = false) String qualitySupervision,
+												 @RequestParam(name = "qualitySupervisionArea",required = false) String qualitySupervisionArea
+												 /*supervision: null, //铁路总公司监督机构、
+										            prefectureSupervision: null,  //地区政府监管部门
+										            qualitySupervision: null,  //质量监督机构
+										            qualitySupervisionArea: null,  //监督机构所属地域*/);
 }

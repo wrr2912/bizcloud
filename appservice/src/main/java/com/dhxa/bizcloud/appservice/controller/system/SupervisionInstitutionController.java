@@ -36,11 +36,19 @@ public class SupervisionInstitutionController {
 	@CrossOrigin
 	public Object getSupervisionInstitutionPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
 												   @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
-												   @RequestParam(name = "unitName", required = false)String unitName) {
+												   @RequestParam(name = "unitName", required = false)String unitName,
+												   @RequestParam(name = "supervision", required = false)String supervision,
+												   @RequestParam(name = "prefectureSupervision", required = false)String prefectureSupervision,
+												   @RequestParam(name = "qualitySupervision", required = false)String qualitySupervision,
+												   @RequestParam(name = "qualitySupervisionArea", required = false)String qualitySupervisionArea) {
 		 logger.info("parameters:pageSize={},pageNumber={},unitName={}",pageSize,pageNumber,unitName);
 		 Subject subject = SecurityUtils.getSubject();
 		 logger.info("sessionid supervisionInstitution=" + subject.getSession().getId());
-		 JSONObject jsonObject = supervisionInstitutionClient.getSupervisionInstitutionPageable(pageSize, pageNumber, unitName);
+		 JSONObject jsonObject = supervisionInstitutionClient.getSupervisionInstitutionPageable(pageSize, pageNumber, unitName,supervision,prefectureSupervision,qualitySupervision,qualitySupervisionArea);
+		 /*supervision: null, //铁路总公司监督机构、
+         prefectureSupervision: null,  //地区政府监管部门
+         qualitySupervision: null,  //质量监督机构
+         qualitySupervisionArea: null,  //监督机构所属地域*/
 		 if(jsonObject.getBooleanValue("success")) {
 			 List<SupervisionInstitution> rows = jsonObject.getJSONObject("result").getJSONArray("rows").toJavaList(SupervisionInstitution .class);
 			 return ResponseUtil.makeSuccessResponse(rows);
@@ -51,9 +59,9 @@ public class SupervisionInstitutionController {
 	
 	@RequestMapping(value = "get" , method = RequestMethod.GET)
     @CrossOrigin
-    public Object getSupervisionInstitutionInfo(@RequestParam Long SIId){
-        logger.info("paras:SIId = {}", SIId);
-        JSONObject jsonObject = supervisionInstitutionClient.findSupervisionInstitutionById(SIId);
+    public Object getSupervisionInstitutionInfo(@RequestParam Long id){
+        logger.info("paras:id = {}", id);
+        JSONObject jsonObject = supervisionInstitutionClient.findSupervisionInstitutionById(id);
         if(jsonObject.getBooleanValue("success")) {
         	List<SupervisionInstitution> rows = jsonObject.getJSONObject("result").getJSONArray("rows").toJavaList(SupervisionInstitution.class);
         	return ResponseUtil.makeSuccessResponse(rows);
@@ -85,9 +93,9 @@ public class SupervisionInstitutionController {
 	 }
 	 @RequestMapping(value = "delete", method = RequestMethod.DELETE)
 	 @CrossOrigin
-	 public Object delSupervisionInstitution(@RequestParam Long SIId) {
+	 public Object delSupervisionInstitution(@RequestParam Long id) {
 	 	try {
-	         supervisionInstitutionClient.deleteSupervisionInstitution(SIId);
+	         supervisionInstitutionClient.deleteSupervisionInstitution(id);
 	         return  ResponseUtil.makeSuccessResponse();
 	   } catch (Exception e) {
 	      throw new NRAPException(SystemErrorCodeType.E_ACTION_FALED,e.getMessage()+"删除");

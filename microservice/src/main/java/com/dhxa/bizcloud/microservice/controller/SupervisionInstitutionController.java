@@ -31,10 +31,19 @@ public class SupervisionInstitutionController {
     @CrossOrigin
     public Object getDeptsPageable(@RequestParam(name = "pageSize", defaultValue = "10") int pageSize,
                                        @RequestParam(name = "pageNumber", defaultValue = "1") int pageNumber,
-                                       @RequestParam(name = "unitName", required = false) String unitName) {
+                                       @RequestParam(name = "unitName", required = false) String unitName,
+                                       @RequestParam(name = "supervision", required = false) String supervision,
+                                       @RequestParam(name = "prefectureSupervision", required = false) String prefectureSupervision,
+                                       @RequestParam(name = "qualitySupervision", required = false) String qualitySupervision,
+                                       @RequestParam(name = "qualitySupervisionArea", required = false) String qualitySupervisionArea) {
         logger.info("parameters:pageSize={},pageNumber={},unitName={}",pageSize,pageNumber,unitName);
         try {
-            Page<SupervisionInstitution> result = supervisionInstitutionService.findPageable(pageSize,pageNumber-1,unitName);
+        	/*supervision: null, //铁路总公司监督机构、
+            prefectureSupervision: null,  //地区政府监管部门
+            qualitySupervision: null,  //质量监督机构
+            qualitySupervisionArea: null,  //监督机构所属地域*/
+            Page<SupervisionInstitution> result = supervisionInstitutionService.findPageable(pageSize,pageNumber-1,unitName,supervision,prefectureSupervision,qualitySupervision,qualitySupervisionArea);
+            System.out.println( result.getContent());
             return ResponseUtil.makeSuccessResponse(result.getTotalElements(), result.getContent());
         } catch (Exception e) {
             logger.error(e.getMessage());
@@ -46,15 +55,15 @@ public class SupervisionInstitutionController {
 	
 	@RequestMapping(value = "get", method = RequestMethod.GET)
 	@CrossOrigin
-	public Object getSupervisionInstitution(@RequestParam Long SIId) {
-		logger.info("paras:id = {}",SIId);
+	public Object getSupervisionInstitution(@RequestParam Long id) {
+		logger.info("paras:id = {}",id);
 		 try{
 	            List<SupervisionInstitution> result = new ArrayList<>();
-	            SupervisionInstitution info = supervisionInstitutionService.findOne(SIId);
+	            SupervisionInstitution info = supervisionInstitutionService.findOne(id);
 	            if(null != result){
 	                result.add(info);
 	            }
-	            logger.info("supervisionInstitution-get result: = [{}],{}",SIId,(info != null) ? info.toString(): "");
+	            logger.info("supervisionInstitution-get result: = [{}],{}",id,(info != null) ? info.toString(): "");
 	            return ResponseUtil.makeSuccessResponse(result.size(), result);
 	        }catch(Exception e){
 	        	System.out.println(e.toString());
@@ -79,7 +88,11 @@ public class SupervisionInstitutionController {
 	public Object updateSupervisionInstitution(@RequestBody SupervisionInstitution data) {
 		
 		try {
-			SupervisionInstitution dbdata = supervisionInstitutionService.findOne(data.getSIId());
+			SupervisionInstitution dbdata = supervisionInstitutionService.findOne(data.getId());
+			dbdata.setSupervision(data.getSupervision());
+			dbdata.setPrefectureSupervision(data.getPrefectureSupervision());
+			dbdata.setQualitySupervision(data.getQualitySupervision());
+			dbdata.setQualitySupervisionArea(data.getQualitySupervisionArea());
 			dbdata.setUnitName(data.getUnitName());
 			dbdata.setUnitAbbreviation(data.getUnitAbbreviation());
 			dbdata.setLegalRepresentative(data.getLegalRepresentative());
@@ -96,6 +109,7 @@ public class SupervisionInstitutionController {
 			dbdata.setEntryMan(data.getEntryMan());
 			dbdata.setEntryDate(data.getEntryDate());
 			supervisionInstitutionService.save(dbdata);
+			
 			return ResponseUtil.makeSuccessResponse();
 		} catch (Exception e) {
 			 throw new NRAPException(SystemErrorCodeType.E_ACTION_FALED,"更新");
@@ -104,12 +118,22 @@ public class SupervisionInstitutionController {
 	
 	@RequestMapping(value = "delete", method = RequestMethod.DELETE)
 	@CrossOrigin
-	public Object deleteSupervisionInstitution(@RequestParam Long SIId) {
+	public Object deleteSupervisionInstitution(@RequestParam Long id) {
 		try {
-			supervisionInstitutionService.delete(SIId);
+			supervisionInstitutionService.delete(id);
 			return ResponseUtil.makeSuccessResponse();
 		} catch (Exception e) {
 			throw new NRAPException(SystemErrorCodeType.E_ACTION_FALED,"删除");
 		}
+	}
+	@RequestMapping(value = "sort")
+	@CrossOrigin
+	public Object sortSupervisionInstitution() {
+		try {
+			
+		} catch (Exception e) {
+			
+		}
+		return logger;
 	}
 }

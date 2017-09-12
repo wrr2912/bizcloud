@@ -13,13 +13,25 @@ import javax.persistence.Table;
  * 监督机构
  */
 @Entity
-@Table(name="SUPERVISIONINSTITUTION")
+@Table(name="TB_SUPERVISIONINSTITUTION")
 public class SupervisionInstitution implements java.io.Serializable {
 	//监督机构基本信息
 	@Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-	@Column(name = "SIID",insertable = true, updatable = true, nullable = false)
-	private Long SIId;  //监督机构信息Id
+	@Column(name = "id",insertable = true, updatable = true, nullable = false)
+	private Long id;  //监督机构信息Id
+	
+	@Column(name = "SUPERVISION")
+	private String supervision; //铁路总公司监督机构
+	
+	@Column(name = "PREFECTURESUPERVISION", nullable = false)
+	private String prefectureSupervision;  //地区政府监管部门
+	
+	@Column(name = "QUALITYSUPERVISION", nullable = false)
+	private String qualitySupervision;  //质量监督机构
+	
+	@Column(name ="QUALITYSUPERVISIONAREA", nullable = false)
+	private String qualitySupervisionArea;  //监督机构所属地域
 	
 	@Column(name = "UNITNAME", nullable = false)
 	private String unitName;  //单位名称
@@ -69,15 +81,20 @@ public class SupervisionInstitution implements java.io.Serializable {
 	private Date entryDate;  //录入日期;系统自动填写
 	
 	public SupervisionInstitution() {}
-	public SupervisionInstitution(Long SIId) {
-		this.SIId = SIId;
+	public SupervisionInstitution(Long id) {
+		this.id = id;
 	}
-	public SupervisionInstitution(Long sIId, String unitName, String unitAbbreviation, String legalRepresentative,
+	public SupervisionInstitution(Long id, String supervision, String prefectureSupervision, String qualitySupervision,
+			String qualitySupervisionArea, String unitName, String unitAbbreviation, String legalRepresentative,
 			String legalPersonCode, String postalAddress, String postalCode, String officialWebsiteLink, String remarks,
 			String telephoneWatch, String entryName, String projectNumber, String projectContact, String contactPhone,
 			String entryMan, Date entryDate) {
 		super();
-		SIId = sIId;
+		this.id = id;
+		this.supervision = supervision;
+		this.prefectureSupervision = prefectureSupervision;
+		this.qualitySupervision = qualitySupervision;
+		this.qualitySupervisionArea = qualitySupervisionArea;
 		this.unitName = unitName;
 		this.unitAbbreviation = unitAbbreviation;
 		this.legalRepresentative = legalRepresentative;
@@ -94,131 +111,123 @@ public class SupervisionInstitution implements java.io.Serializable {
 		this.entryMan = entryMan;
 		this.entryDate = entryDate;
 	}
-
-	public Long getSIId() {
-		return SIId;
+	public Long getId() {
+		return id;
 	}
-
-	public void setSIId(Long sIId) {
-		SIId = sIId;
+	public void setId(Long id) {
+		this.id = id;
 	}
-
+	public String getSupervision() {
+		return supervision;
+	}
+	public void setSupervision(String supervision) {
+		this.supervision = supervision;
+	}
+	public String getPrefectureSupervision() {
+		return prefectureSupervision;
+	}
+	public void setPrefectureSupervision(String prefectureSupervision) {
+		this.prefectureSupervision = prefectureSupervision;
+	}
+	public String getQualitySupervision() {
+		return qualitySupervision;
+	}
+	public void setQualitySupervision(String qualitySupervision) {
+		this.qualitySupervision = qualitySupervision;
+	}
+	public String getQualitySupervisionArea() {
+		return qualitySupervisionArea;
+	}
+	public void setQualitySupervisionArea(String qualitySupervisionArea) {
+		this.qualitySupervisionArea = qualitySupervisionArea;
+	}
 	public String getUnitName() {
 		return unitName;
 	}
-
 	public void setUnitName(String unitName) {
 		this.unitName = unitName;
 	}
-
 	public String getUnitAbbreviation() {
 		return unitAbbreviation;
 	}
-
 	public void setUnitAbbreviation(String unitAbbreviation) {
 		this.unitAbbreviation = unitAbbreviation;
 	}
-
 	public String getLegalRepresentative() {
 		return legalRepresentative;
 	}
-
 	public void setLegalRepresentative(String legalRepresentative) {
 		this.legalRepresentative = legalRepresentative;
 	}
-
 	public String getLegalPersonCode() {
 		return legalPersonCode;
 	}
-
 	public void setLegalPersonCode(String legalPersonCode) {
 		this.legalPersonCode = legalPersonCode;
 	}
-
 	public String getPostalAddress() {
 		return postalAddress;
 	}
-
 	public void setPostalAddress(String postalAddress) {
 		this.postalAddress = postalAddress;
 	}
-
 	public String getPostalCode() {
 		return postalCode;
 	}
-
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
 	}
-
 	public String getOfficialWebsiteLink() {
 		return officialWebsiteLink;
 	}
-
 	public void setOfficialWebsiteLink(String officialWebsiteLink) {
 		this.officialWebsiteLink = officialWebsiteLink;
 	}
-
 	public String getRemarks() {
 		return remarks;
 	}
-
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
-
 	public String getTelephoneWatch() {
 		return telephoneWatch;
 	}
-
 	public void setTelephoneWatch(String telephoneWatch) {
 		this.telephoneWatch = telephoneWatch;
 	}
-
 	public String getEntryName() {
 		return entryName;
 	}
-
 	public void setEntryName(String entryName) {
 		this.entryName = entryName;
 	}
-
 	public String getProjectNumber() {
 		return projectNumber;
 	}
-
 	public void setProjectNumber(String projectNumber) {
 		this.projectNumber = projectNumber;
 	}
-
 	public String getProjectContact() {
 		return projectContact;
 	}
-
 	public void setProjectContact(String projectContact) {
 		this.projectContact = projectContact;
 	}
-
 	public String getContactPhone() {
 		return contactPhone;
 	}
-
 	public void setContactPhone(String contactPhone) {
 		this.contactPhone = contactPhone;
 	}
-
 	public String getEntryMan() {
 		return entryMan;
 	}
-
 	public void setEntryMan(String entryMan) {
 		this.entryMan = entryMan;
 	}
-
 	public Date getEntryDate() {
 		return entryDate;
 	}
-
 	public void setEntryDate(Date entryDate) {
 		this.entryDate = entryDate;
 	}
