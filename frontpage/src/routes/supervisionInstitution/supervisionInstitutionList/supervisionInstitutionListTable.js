@@ -7,7 +7,27 @@ const SupervisionInstitutionListTable = ({ dispatch, supervisionInstitutionTable
   const columns = [
     {
       title: 'ID',
-      dataIndex: 'SIId',
+      dataIndex: 'id',
+      width: 100,
+    },
+    {
+      title: '铁路总公司监督机构',
+      dataIndex: 'supervision',
+      width: 100,
+    },
+    {
+      title: '地区政府监管部门',
+      dataIndex: 'prefectureSupervision',
+      width: 100,
+    },
+    {
+      title: '质量监督机构',
+      dataIndex: 'qualitySupervision',
+      width: 100,
+    },
+    {
+      title: '监督机构所属地域',
+      dataIndex: 'qualitySupervisionArea',
       width: 100,
     },
     {
@@ -84,7 +104,8 @@ const SupervisionInstitutionListTable = ({ dispatch, supervisionInstitutionTable
       title: '录入日期',
       dataIndex: 'entryDate',
       width: 100,
-    },
+      render:text => new Date(text).format("yyyy-MM-dd hh:mm:ss")
+},
     {
       title: '操作',
       width: 100,
@@ -92,11 +113,11 @@ const SupervisionInstitutionListTable = ({ dispatch, supervisionInstitutionTable
         <div>
           <a onClick={() => editSupervisionInstitution(record)}>编辑</a>
           <span className="ant-divider" />
-          <Popconfirm title="是否确认删除该单位?" onConfirm={() => delSupervisionInstitution(record.SIId)} okText="是" cancelText="否">
+          <Popconfirm title="是否确认删除该单位?" onConfirm={() => delSupervisionInstitution(record.id)} okText="是" cancelText="否">
             <a href="#" style={{ color: 'red' }}>删除</a>
           </Popconfirm>
           <span className="ant-divider" />
-          <Link to={`/supervisionInstitution/supervisionInstitutionView/${record.SIId}`}>查看</Link>
+          <Link to={`/supervisionInstitution/supervisionInstitutionView/${record.id}`}>查看</Link>
         </div>
       ),
     },
@@ -119,7 +140,7 @@ const SupervisionInstitutionListTable = ({ dispatch, supervisionInstitutionTable
            dataSource={supervisionInstitutionTableDataSource}
            columns={columns}
            onChange={onChange}
-           rowKey="SIID"
+           rowKey="id"
            pagination={pagination}
            loading={supervisionInstitutionTableLoading}
     />

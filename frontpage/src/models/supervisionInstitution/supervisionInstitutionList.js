@@ -1,6 +1,5 @@
 import { config } from '../../utils'
 import { getSupervisionInstitutionTableDataSource, createSupervisionInstitution, updateSupervisionInstitution, deleteSupervisionInstitution} from '../../services/supervisionInstitution'
-
 const { defaultPageSize } = config
 
 export default {
@@ -9,6 +8,10 @@ export default {
     supervisionInstitutionTableDataSource: [],  // 用来保存列表数据
     supervisionInstitutionTableLoading: false,  // 控制表格加载效果
     txtUnitName: null,  // 用来保存文本框输入的值
+    txtSupervision: null, //铁路总公司监督机构、
+    txtPrefectureSupervision: null,  //地区政府监管部门
+    txtQualitySupervision: null,  //质量监督机构
+    txtQualitySupervisionArea: null,  //监督机构所属地域
     pagination: {
       showSizeChanger: true,  // 是否可以改变 pageSize
       showQuickJumper: true,  // 是否可以快速跳转至某页
@@ -49,6 +52,7 @@ export default {
             },
             supervisionInstitutionTableLoading: false,
           },
+
         })  // 将返回结果赋值给state
       } else {
         yield put({ type: 'HideLoading' })
@@ -118,6 +122,30 @@ export default {
     },
 
     onChangeUnitName (state, action) {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    },
+    onChangeSupervision (state, action) {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    },
+    onChangePrefectureSupervision (state, action) {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    },
+    onChangeQualitySupervision (state, action) {
+      return {
+        ...state,
+        ...action.payload,
+      }
+    },
+    onChangeQualitySupervisionArea (state, action) {
       return {
         ...state,
         ...action.payload,

@@ -1,5 +1,8 @@
 import React, { PropTypes } from 'react'
 import { Form, Modal, Input, Radio } from 'antd'
+import app from '../../../models/app'
+const {state} = app
+const userName = state.user.userName
 
 const FormItem = Form.Item
 const RadioGroup = Radio.Group
@@ -12,6 +15,23 @@ const formItemLayout = {
     span: 14,
   },
 }
+/*function getDateTime(dt) {
+  var year=dt.getFullYear();
+  var month=dt.getMonth()+1;
+  var day=dt.getDate();
+  var h=dt.getHours();
+  var m=dt.getMinutes();
+  var s=dt.getSeconds();
+
+  // 这里应该想一下，如果是个数怎么办？那就用三元表达式来处理
+  month=month<10?"0"+month:month;
+  day=day<10?"0"+day:day;
+  h=h<10?"0"+h:h;
+  m=m<10?"0"+m:m;
+  s=s<10?"0"+s:s;
+
+  return year+"年"+month+"月"+day+"日"+h+"时"+m+"分"+s+"秒";
+}*/
 
 const SupervisionInstitutionCreateModel = ({
                                 onOk,
@@ -40,7 +60,7 @@ const SupervisionInstitutionCreateModel = ({
       } else {
         data = {
           supervisionInstitution: {
-            SIId: editObj.SIId,
+            id: editObj.id,
             ...getFieldsValue(),
           },
           isCreate: false,
@@ -71,7 +91,29 @@ const SupervisionInstitutionCreateModel = ({
             ],
           })(<Input />)}
         </FormItem>
+        <FormItem label="铁路总公司监督机构" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('supervision', {
+            initialValue: editObj !== null ? editObj.supervision : '',
+          })(<Input />)}
+        </FormItem>
 
+        <FormItem label="地区政府监管部门" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('prefectureSupervision', {
+            initialValue: editObj !== null ? editObj.prefectureSupervision : '',
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem label="质量监督机构" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('qualitySupervision', {
+            initialValue: editObj !== null ? editObj.qualitySupervision : '',
+          })(<Input />)}
+        </FormItem>
+
+        <FormItem label="监督机构所属地域" hasFeedback {...formItemLayout}>
+          {getFieldDecorator('qualitySupervisionArea', {
+            initialValue: editObj !== null ? editObj.qualitySupervisionArea : '',
+          })(<Input />)}
+        </FormItem>
         <FormItem label="单位简称" hasFeedback {...formItemLayout}>
           {getFieldDecorator('unitAbbreviation', {
             initialValue: editObj !== null ? editObj.unitAbbreviation : '',
@@ -144,16 +186,17 @@ const SupervisionInstitutionCreateModel = ({
           })(<Input />)}
         </FormItem>
 
-        <FormItem label="录入人" hasFeedback {...formItemLayout}>
+        <FormItem>
           {getFieldDecorator('entryMan', {
-            initialValue: editObj !== null ? editObj.entryMan : '',
-          })(<Input />)}
+            initialValue: userName,
+          })}
         </FormItem>
 
-        <FormItem label="录入时间" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('entryDate', {
-            initialValue: editObj !== null ? editObj.entryDate : '',
-          })(<Input />)}
+
+        <FormItem >
+        {getFieldDecorator('entryDate', {
+          initialValue: new Date()
+        })}
         </FormItem>
 
       </Form>

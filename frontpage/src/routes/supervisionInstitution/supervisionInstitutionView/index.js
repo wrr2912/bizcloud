@@ -13,7 +13,27 @@ const SupervisionInstitutionView = ({ dispatch, supervisionInstitutionView }) =>
     <div className="content-inner">
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          ID：{supervisionInstitution.SIId !== null ? supervisionInstitution.SIId : <Icon type="loading" />}
+          ID：{supervisionInstitution.id !== null ? supervisionInstitution.id : <Icon type="loading" />}
+        </Col>
+      </Row>
+      <Row gutter={24}>
+        <Col md={{ span: 6 }}>
+          铁路总公司监督机构：{supervisionInstitution.supervision !== null ? supervisionInstitution.supervision : <Icon type="loading" />}
+        </Col>
+      </Row>
+      <Row gutter={24}>
+        <Col md={{ span: 6 }}>
+          地区政府监管部门：{supervisionInstitution.prefectureSupervision !== null ? supervisionInstitution.prefectureSupervision: <Icon type="loading" />}
+        </Col>
+      </Row>
+      <Row gutter={24}>
+        <Col md={{ span: 6 }}>
+          质量监督机构：{supervisionInstitution.qualitySupervision !== null ? supervisionInstitution.qualitySupervision : <Icon type="loading" />}
+        </Col>
+      </Row>
+      <Row gutter={24}>
+        <Col md={{ span: 6 }}>
+          监督机构所属地域：{supervisionInstitution.qualitySupervisionArea !== null ? supervisionInstitution.qualitySupervisionArea : <Icon type="loading" />}
         </Col>
       </Row>
       <Row gutter={24}>
@@ -48,7 +68,7 @@ const SupervisionInstitutionView = ({ dispatch, supervisionInstitutionView }) =>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          官网链接：{supervisionInstitution.officialWebsiteLink !== null ? supervisionInstitution.officialWebsiteLink : <Icon type="loading" />}
+          官网链接：{supervisionInstitution.officialWebsiteLink !== null ? <a href={supervisionInstitution.officialWebsiteLink}>{supervisionInstitution.officialWebsiteLink}</a> : <Icon type="loading" />}
         </Col>
       </Row>
       <Row gutter={24}>
@@ -87,7 +107,7 @@ const SupervisionInstitutionView = ({ dispatch, supervisionInstitutionView }) =>
       </Row>
       <Row gutter={24}>
         <Col md={{ span: 6 }}>
-          录入日期：{supervisionInstitution.entryDate !== null ? supervisionInstitution.entryDate: <Icon type="loading" />}
+          录入日期：{supervisionInstitution.entryDate !== null ? new Date(supervisionInstitution.entryDate).format("yyyy年MM月dd日 hh时mm分ss秒"): <Icon type="loading" />}
         </Col>
       </Row>
       <Row gutter={24}>

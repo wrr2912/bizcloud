@@ -8,8 +8,12 @@ import SupervisionInstitutionCreateModel from './supervisionInstitutionCreateMod
 // 定义画面接口参数，其中personnelList就是我们在model里面设定的namespace
 const SupervisionInstitutionList = ({ location, dispatch, supervisionInstitutionList, loading, app }) => {
   // 展开state中的属性
-  const { supervisionInstitutionTableDataSource, supervisionInstitutionTableLoading, txtUnitName, pagination, createModelVisible, editObj } = supervisionInstitutionList
+  const { supervisionInstitutionTableDataSource, supervisionInstitutionTableLoading, txtUnitName,txtSupervision, txtPrefectureSupervision,txtQualitySupervision,txtQualitySupervisionArea,pagination, createModelVisible, editObj } = supervisionInstitutionList
 
+    /*txtSupervision: null, //铁路总公司监督机构、
+    txtPrefectureSupervision: null,  //地区政府监管部门
+    txtQualitySupervision: null,  //质量监督机构
+    txtQualitySupervisionArea: null,  //监督机构所属地域*/
   // 传递给表格组件的属性
   const tableProp = {
     dispatch,
@@ -34,7 +38,6 @@ const SupervisionInstitutionList = ({ location, dispatch, supervisionInstitution
       })
     },
   }
-
   const onChange = (e) => {
     dispatch({
       type: 'supervisionInstitutionList/onChangeUnitName',
@@ -43,12 +46,47 @@ const SupervisionInstitutionList = ({ location, dispatch, supervisionInstitution
       },
     })
   }
-
+  const onChange1 = (e) => {
+    dispatch({
+      type: 'supervisionInstitutionList/onChangeSupervision',
+      payload: {
+        txtSupervision: e.target.value,
+      },
+    })
+  }
+  const onChange2 = (e) => {
+    dispatch({
+      type: 'supervisionInstitutionList/onChangePrefectureSupervision',
+      payload: {
+        txtPrefectureSupervision: e.target.value,
+      },
+    })
+  }
+  const onChange3 = (e) => {
+    dispatch({
+      type: 'supervisionInstitutionList/onChangeQualitySupervision',
+      payload: {
+        txtQualitySupervision: e.target.value,
+      },
+    })
+  }
+  const onChange4 = (e) => {
+    dispatch({
+      type: 'supervisionInstitutionList/onChangeQualitySupervisionArea',
+      payload: {
+        txtQualitySupervisionArea: e.target.value,
+      },
+    })
+  }
+    /*txtSupervision: null, //铁路总公司监督机构、
+      txtPrefectureSupervision: null,  //地区政府监管部门
+      txtQualitySupervision: null,  //质量监督机构
+      txtQualitySupervisionArea: null,  //监督机构所属地域*/
   const onClick = () => {
     dispatch({
       type: 'supervisionInstitutionList/getSupervisionInstitutionTableDataSource',
       payload: {
-        txtUnitName,
+        txtUnitName,txtSupervision,txtPrefectureSupervision,txtQualitySupervision,txtQualitySupervisionArea,
       },
     })
   }
@@ -91,16 +129,28 @@ const SupervisionInstitutionList = ({ location, dispatch, supervisionInstitution
   return (
     <div className="content-inner">
       <Row gutter={24}>
-        <Col md={{ span: 6 }}>
+        <Col md={{ span: 3 }}>
+          <Input placeholder="铁路总公司监督机构" value={txtSupervision} onChange={onChange1} />
+        </Col>
+        <Col md={{ span: 3 }}>
+          <Input placeholder="地区政府监管部门" value={txtPrefectureSupervision} onChange={onChange2} />
+        </Col>
+        <Col md={{ span: 3 }}>
+          <Input placeholder="质量监督机构" value={txtQualitySupervision} onChange={onChange3} />
+        </Col>
+        <Col md={{ span: 3 }}>
+          <Input placeholder="监督机构所属地域" value={txtQualitySupervisionArea} onChange={onChange4} />
+        </Col>
+        <Col md={{ span: 3 }}>
           <Input placeholder="单位名称" value={txtUnitName} onChange={onChange} />
         </Col>
-        <Col md={{ span: 6 }}>
+        <Col md={{ span: 3 }}>
           <Button type="primary" icon="search" onClick={onClick}>查询</Button>
         </Col>
       </Row>
       <Row gutter={24} style={{ marginTop: '10px' }}>
         <Col span={24}>
-          <Button icon="plus" type="primary" onClick={showCreateModal}>添加人员</Button>
+          <Button icon="plus" type="primary" onClick={showCreateModal}>添加监管机构</Button>
           {createModelVisible && <SupervisionInstitutionCreateModel {...modalProps} /> }
         </Col>
       </Row>
