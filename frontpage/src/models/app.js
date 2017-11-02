@@ -7,7 +7,7 @@ export default {
   namespace: 'app',
   state: {
     menus: [],
-    user: {},
+    user: {userName:"hehehe"},
     personal: { link: '/personal2', title: '个人信息' },
     menuPopoverVisible: false,
     siderFold: localStorage.getItem(`${prefix}siderFold`) === 'true',
@@ -60,7 +60,7 @@ export default {
         if (location.pathname === '/dashboard') {
           from = '/dashboard'
         };
-     //   window.location = `${location.origin}/login?from=${from}`
+        //window.location = `${location.origin}/login?from=${from}`
       }
     },
 
