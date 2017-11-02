@@ -142,7 +142,128 @@ public class EnterpriseController {
         	if(data.getStaff_number() != null) {
         		dbData.setStaff_number(data.getStaff_number());
         	}
-            enterpriseService.save(dbData);
+
+        	if(data.getManufacturer_administrative() != null) {
+
+            	dbData.setManufacturer_administrative(data.getManufacturer_administrative());
+        	}
+
+	    	if(data.getArea() != null) {
+	    		dbData.setArea(data.getArea());
+	    	}
+	
+	    	if(data.getAssets() != null) {
+	    		dbData.setAssets(data.getAssets());
+	    	}
+	
+	    	if(data.getBusiness_status() != null) {
+	    		dbData.setBusiness_status(data.getBusiness_status());
+	    	}
+	
+	    	if(data.getCompany_identification() != null) {
+	    		dbData.setCompany_identification(data.getCompany_identification());
+	    	}
+	
+	    	if(data.getCompany_name() != null) {
+	    		dbData.setCompany_name(data.getCompany_name());
+	    	}
+	
+	    	if(data.getEconomic_coding() != null) {
+	    		dbData.setEconomic_coding(data.getEconomic_coding());
+	    	}
+	
+	    	if(data.getEmail() != null) {
+	    		dbData.setEmail(data.getEmail());
+	    	}
+	
+	    	if(data.getEnterprise_identification() != null) {
+	    		dbData.setEnterprise_identification(data.getEnterprise_identification());
+	    	}
+	
+	    	if(data.getEnterprise_name() != null) {
+	    		dbData.setEnterprise_name(data.getEnterprise_name());
+	    	}
+	
+	    	if(data.getEnterprise_nature() != null) {
+	    		dbData.setEnterprise_nature(data.getEnterprise_nature());
+	    	}
+	
+	    	if(data.getEnterprise_type() != null) {
+	    		dbData.setEnterprise_type(data.getEnterprise_type());
+	    	}
+	
+	    	if(data.getGroup_flag() != null) {
+	    		dbData.setGroup_flag(data.getGroup_flag());
+	    	}
+	
+	    	if(data.getIndustry_affiliation() != null) {
+	    		dbData.setIndustry_affiliation(data.getIndustry_affiliation());
+	    	}
+	
+	    	if(data.getIndustry_code() != null) {
+	    		dbData.setIndustry_code(data.getIndustry_code());
+	    	}
+	
+	    	if(data.getLicense_type() != null) {
+	    		dbData.setLicense_type(data.getLicense_type());
+	    	}
+	
+	    	if(data.getLocal_regulators() != null) {
+	    		dbData.setLocal_regulators(data.getLocal_regulators());
+	    	}
+	
+	    	if(data.getN_ecnomic_code() != null) {
+	    		dbData.setN_ecnomic_code(data.getN_ecnomic_code());
+	    	}
+	
+	    	if(data.getOrgnization_code() != null) {
+	    		dbData.setOrgnization_code(data.getOrgnization_code());
+	    	}
+	
+	    	if(data.getP_enterprise_identification() != null) {
+	    		dbData.setP_enterprise_identification(data.getP_enterprise_identification());
+	    	}
+	
+	    	if(data.getEnterprise_name() != null) {
+	    		dbData.setP_enterprise_name(data.getEnterprise_name());
+	    	}
+	
+	    	if(data.getProfile() != null) {
+	    		dbData.setProfile(data.getProfile());
+	    	}
+	
+	    	if(data.getProfit() != null) {
+	    		dbData.setProfit(data.getProfit());
+	    	}
+	
+	    	if(data.getRegister_administrative() != null) {
+	    		dbData.setRegister_administrative(data.getRegister_administrative());
+	    	}
+	
+	    	if(data.getRegistration_number() != null) {
+	    		dbData.setRegistration_number(data.getRegistration_number());
+	    	}
+	
+	    	if(data.getResponsible_contacts() != null) {
+	    		dbData.setResponsible_contacts(data.getResponsible_contacts());
+	    	}
+	
+	    	if(data.getResponsible_email() != null) {
+	    		dbData.setResponsible_email(data.getResponsible_email());
+	    	}
+	
+	    	if(data.getResponsible_person() != null) {
+	    		dbData.setResponsible_person(data.getResponsible_person());
+	    	}
+	
+	    	if(data.getManufacturer_administrative() != null) {
+	    		dbData.setScale(data.getScale());
+	    	}
+	
+	    	if(data.getScope() != null) {
+	    		dbData.setScope(data.getScope());
+	    	}
+    		 enterpriseService.save(dbData);
             return  ResponseUtil.makeSuccessResponse();
         } catch (Exception e) {
             throw new NRAPException(SystemErrorCodeType.E_ACTION_FALED,"更新");

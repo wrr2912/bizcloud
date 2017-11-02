@@ -4,5 +4,6 @@ import Bread from './Bread'
 import Sider from './Sider'
 import Footer from './Footer'
 import styles from './Layout.less'
+import UploadButton from './Upload'
 
-export { Header, Menu, Bread, Sider, Footer, styles }
+export { Header, Menu, Bread, Sider, Footer, styles, UploadButton }

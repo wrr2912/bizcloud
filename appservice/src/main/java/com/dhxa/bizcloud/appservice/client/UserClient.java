@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.alibaba.fastjson.JSONObject;
 import com.dhxa.bizcloud.appservice.entity.User;
 
-@FeignClient("MICRO-SERVIC")
+@FeignClient("MICRO-SERVIC-RR")
 public interface UserClient {
 
 	@RequestMapping(value = "/user/findUserByUserName", method = RequestMethod.GET)

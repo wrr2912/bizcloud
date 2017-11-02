@@ -14,7 +14,7 @@ const EnterpriseList = ({ location, dispatch, enterpriseList, loading, app }) =>
   const tableProp = {
     dispatch,
     enterpriseTableDataSource,
-      enterpriseTableLoading,
+    enterpriseTableLoading,
     pagination,
     editEnterprise (record) {
       dispatch({
@@ -53,6 +53,7 @@ const EnterpriseList = ({ location, dispatch, enterpriseList, loading, app }) =>
   }
 
   const modalProps = {
+    dispatch,
     visible: createModelVisible,
     maskClosable: false,
     confirmLoading: loading.effects['enterpriseList/saveEnterprise'],
@@ -77,6 +78,7 @@ const EnterpriseList = ({ location, dispatch, enterpriseList, loading, app }) =>
     editObj,
     title:modalTitle,
     width: '80%',
+
   }
 
   const showCreateModal = () => {
