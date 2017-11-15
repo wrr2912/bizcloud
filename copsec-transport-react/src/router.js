@@ -221,6 +221,8 @@ const Routers = function ({ history, app }) {
           getComponent (nextState, cb) {
             require.ensure([], (require) => {
               registerModel(app, require('./models/license/licenseList'))
+              registerModel(app, require('./models/license/meetingList'))
+              registerModel(app, require('./models/minutes/minutesList'))
               cb(null, require('./routes/license/'))
             }, 'license')
           },

@@ -66,7 +66,6 @@ const modal = ({
       id:item.id,
 
     }
-    console.log(data)
     showAdviceModal(data)
 
   }

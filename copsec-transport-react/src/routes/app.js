@@ -18,7 +18,6 @@ const App = ({ children, location, dispatch, app, loading }) => {
   const { menus, user, personal, siderFold, darkTheme, isNavbar, menuPopoverVisible, navOpenKeys } = app
   let customMenus = arrayToTree(menus, 'key', 'mpid');
   let userMenus = [...customMenus]
-  console.log("userMenus:" + JSON.stringify(userMenus));
   NProgress.start()
   !loading.global && NProgress.done()
   const headerProps = {

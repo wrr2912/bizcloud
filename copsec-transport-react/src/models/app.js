@@ -49,12 +49,15 @@ export default {
           const dataMenus = yield call(getCustomMenus, parse(payload))
           console.log('-----登陆成功，获取菜单--------')
           console.log(dataMenus)
+        let menuList = dataMenus.rows;
+        menuList = menuList.filter(menu => menu.key !== 1395)
           if (dataMenus.success && dataMenus.rows) {
             console.log('data menus got')
             yield put({
               type: 'queryMenus',
               payload: {
-                menus: dataMenus.rows,
+             //   menus: dataMenus.rows,
+                menus:menuList,
                // permission:dataMenus.permission,
               }
             })

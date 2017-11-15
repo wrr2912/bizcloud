@@ -74,7 +74,6 @@ const MinutesList = ({ location, dispatch, minutesList, loading, app }) => {
     <div className="content-inner">
       <Row gutter={24} style={{ marginTop: '10px' }}>
         <Col span={24}>
-          <Button icon="plus" type="primary" onClick={showCreateModal}>新增会议记录</Button>
           {createModelVisible && <MinutesCreateModel {...modalProps} /> }
         </Col>
       </Row>

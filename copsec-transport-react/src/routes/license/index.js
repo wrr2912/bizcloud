@@ -2,28 +2,29 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { routerRedux } from 'dva/router'
 import { connect } from 'dva'
-import List from './List'
-import Filter from './Filter'
-import Modal from './Modal'
-import CompanyModal from './company/companyModal'
+import Filter from './components/Filter'
+import MeetingListTable from './components/MeetingListTable'
+import List from "./licenseList/List"
+import CompanyModal from './Modals/company/companyModal'
 import MatchModal from './MatchModal'
 import CheckModal from './CheckModal'
 import ApproveModal from './ApproveModal'
 import CollectModal from './CollectModal'
 import IssueModal from './IssueModal'
 import NodeModal from './NodeModal'
+import DocModal from "./components/DocModal"
+import OpinionBook from './docTemplate/OpinionBook'
+import DecisionBook from './docTemplate/DecisionBook'
 
 
-const License = ({ location, dispatch, licenseList, loading , app}) => {
+const License = ({ location, dispatch, licenseList ,loading , app}) => {
   const { permission } = app
-  const { licenseTableDataSource,docHtml,adviceList,advice,company,companyVisible,
+  const {licenseTableDataSource, docHtml,adviceList,advice,company,companyVisible,
     docKey,checkItem,pagination,searchItem, currentItem,checkNodeVisible,
-    adviceModalVisible,checkModalVisible,issueModalVisible,matchModalVisible, modalVisible,
-    chiefsModelVisible,collectModalVisible,
-    goverVisible,adminVisible,
-    modalType, isMotion } = licenseList
-  const { pageSize } = pagination
-
+    adviceFormVisible,checkModalVisible,issueModalVisible,matchModalVisible, modalVisible,
+    chiefsModelVisible,collectModalVisible,goverVisible,adminVisible,opinionBookVisible,decisionBookVisible,
+    opinionItems,decisionItems,modalType, isMotion } = licenseList
+    const {pageSize} = pagination
   //材料审查弹出页面属性
   const modalProps = {
     item: currentItem,
@@ -116,23 +117,30 @@ const License = ({ location, dispatch, licenseList, loading , app}) => {
     item: currentItem,
     checkItem: checkItem,
     visible: checkModalVisible,
-    adviceList:adviceList,
     docHtml:docHtml,
     docKey:docKey,
-    advice:advice,
-    adviceModalVisible:adviceModalVisible,
     maskClosable: false,
+    adviceFormVisible:adviceFormVisible,
     confirmLoading: loading.effects['licenseList/update'],
-    title:  '材料审查',
+    title:  '在线预览',
     wrapClassName: 'vertical-center-modal',
-    onOk (data) {
+    updateDocHtml:(data)=>{
       dispatch({
+        type: 'licenseList/updateDocHtml',
+        payload:{docHtml:data},
+      })
+    },
+    onOk (data) {
+    /*  dispatch({
         type: 'licenseList/workAdvice',
+        payload: data,
+      })*/
+      dispatch({
+        type: 'licenseList/saveApply',
         payload: data,
       })
     },
     setDocKey(data){
-
       dispatch({
         type: 'licenseList/setDocKey',
         payload:data
@@ -141,12 +149,6 @@ const License = ({ location, dispatch, licenseList, loading , app}) => {
     onCancel () {
       dispatch({
         type: 'licenseList/hideCheckModal',
-      })
-    },
-    saveAdvice(data) {
-      dispatch({
-        type: 'licenseList/saveAdvice',
-        payload:data
       })
     },
   }
@@ -168,10 +170,10 @@ const License = ({ location, dispatch, licenseList, loading , app}) => {
   }
 
   //材料审查意见弹出页面属性
-  const adviceModalProps = {
+ /* const adviceModalProps = {
     item: currentItem,
     adviceModalVisible:adviceModalVisible,
-    title:  '材料审查意见',
+    title:  '材料审查',
     onAdviceOk (data) {
       dispatch({
         type: 'licenseList/saveApply',
@@ -182,7 +184,7 @@ const License = ({ location, dispatch, licenseList, loading , app}) => {
         type: 'licenseList/hideAdviceModal',
       })
     },
-  }
+  }*/
 
 //发证页面属性
   const issueModalProps = {
@@ -218,12 +220,18 @@ const License = ({ location, dispatch, licenseList, loading , app}) => {
   }
   //列表属性
   const listProps = {
-    dataSource: licenseTableDataSource,
-    menuOptions: permission[location.pathname],
-    loading: loading.effects['licenseList/getLicenseTableDataSource'],
-    pagination,
-    location,
+    dataSource:licenseTableDataSource,
+    loading : loading.effects['licenseList/getLicenseTableDataSource'],
+    pagination:pagination,
+      location,
+  //  dispatch,
     isMotion,
+    setDocKey(data){
+      dispatch({
+        type: 'licenseList/setDocKey',
+        payload:data
+      })
+    },
     checkNode(item){//展示流程节点
 
       dispatch({
@@ -271,13 +279,22 @@ const License = ({ location, dispatch, licenseList, loading , app}) => {
       })
     },
     onCheckItem(item){//材料审查
-      console.log('----------材料审查--------------')
-      console.log(item)
       dispatch({
         type: 'licenseList/checkLicense',
         payload: {
           modalType: 'check',
           currentItem: item,
+          adviceFormVisible:true
+        },
+      })
+    },
+    onOverlookItem(item){//材料审查
+      dispatch({
+        type: 'licenseList/checkLicense',
+        payload: {
+          modalType: 'check',
+          currentItem: item,
+          adviceFormVisible:false
         },
       })
     },
@@ -340,17 +357,20 @@ const License = ({ location, dispatch, licenseList, loading , app}) => {
           currentItem: item,
         },
       })
+    },
+    onOpinionBook(item){
+      dispatch({type:"licenseList/showOpinionBook",payload:{currentItem:item}});
+    },
+    onDecisionBook(item){
+      dispatch({type:"licenseList/showDecisionBook",payload:{currentItem:item}});
     }
   }
-//检索属性
   const filterProps = {
-
-    filter: {
+   filter : {
       ...location.query,
     },
-    onFilterChange (value) {
-      console.log('---111----fileter111-----111---')
-      console.log(value)
+
+    onFilterChange : (value)=>{
       dispatch(routerRedux.push({
         pathname: location.pathname,
         query: {
@@ -359,41 +379,44 @@ const License = ({ location, dispatch, licenseList, loading , app}) => {
           pageSize,
         },
       }))
-    },
-    onSearch (fieldsValue) {
-      fieldsValue.keyword.length ? dispatch(routerRedux.push({
-        pathname: '/license/licenseList/',
-        query: {
-          field: fieldsValue.field,
-          keyword: fieldsValue.keyword,
-        },
-      })) : dispatch(routerRedux.push({
-        pathname: '/license',
-      }))
-    },
-    onAdd () {
-      dispatch({
-        type: 'licenseList/showModal',
-        payload: {
-          modalType: 'create',
-        },
-      })
-    },
-
+    }
   }
 
+  const opinionBookProps = {
+    opinionItems:opinionItems,
+    item:currentItem,
+    visible:opinionBookVisible,
+    onOk:(data)=>{
+      dispatch({type:"licenseList/saveOpinionBook",payload:data});
+    },
+    onCancel:()=>{
+      dispatch({type:"licenseList/hideOpinionBookModal"});
+    }
+  }
+
+  const decisionBookProps = {
+    decisionItems:decisionItems,
+    item:currentItem,
+    visible:decisionBookVisible,
+    onOk:(data)=>{
+      dispatch({type:"licenseList/saveDecisionBook",payload:data});
+    },
+    onCancel:()=>{
+      dispatch({type:"licenseList/hideDecisionBookModal"});
+    }
+  }
   return (
     <div className="content-inner">
-      <Filter {...filterProps} />
+      <Filter {...filterProps}/>
+      <MeetingListTable dispatch={dispatch}/>
       <List {...listProps} />
       {companyVisible && <CompanyModal {...companyModalProps} />}
       {modalVisible && <ApproveModal {...modalProps} />}
-      {checkNodeVisible && <NodeModal {...checkNodeProps} />}
-      {matchModalVisible && <MatchModal  {...matchModalProps} />}
       {collectModalVisible && <CollectModal  {...collectModalProps} />}
       {issueModalVisible && <IssueModal  {...issueModalProps} />}
-      {checkModalVisible && <CheckModal {...checkModalProps} {...adviceModalProps}/>}
-
+      {checkModalVisible && <CheckModal {...checkModalProps} />}
+      {opinionBookVisible && <OpinionBook {...opinionBookProps}/>}
+      {decisionBookVisible && <DecisionBook {...decisionBookProps}/>}
     </div>
   )
 }

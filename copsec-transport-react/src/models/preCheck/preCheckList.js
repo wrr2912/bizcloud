@@ -26,7 +26,7 @@ export default {
     adviceList:[],
     docKey:'',
     checkItem: [],//审查材料数据
-    docHtml:docHtml,//审查文档
+    docHtml:'',//审查文档
     editObj:null,
     detailVisible: false,
     detailObj:null,
@@ -99,8 +99,7 @@ export default {
       }
     },
     * checkLicense({ payload }, { call, put }){
-      console.log('----------材料审查--------------')
-      console.log(payload.currentItem)
+
       let data = yield call(getAdvice, payload.currentItem)
       if(data.success){
         yield put({
@@ -155,9 +154,48 @@ export default {
         throw (error) // 抛出错误信息，交给dva处理
       }
     },
+    * getMaterial({ payload }, { call, put }){
+      let data = yield call(getdocs, payload.currentItem.id)
+      if(data.success){
+        const rows = data.rows;
+        let docKey = '';
+        let docHtml = '';
+
+        if(rows != null && rows.length  > 0){
+          let {children} = rows[0];
+          if(children != null && children.length  > 0){
+            docKey = children[0];
+            docHtml = docKey.html;
+          }
+        }
+
+        yield put({
+          type: 'showMaterialModal',
+          payload: {
+            currentItem: payload.currentItem,
+            checkItem:rows,
+            docKey:docKey,
+            docHtml:docHtml
+          }
+        })
+      }else {
+        yield put({ type: 'HideLoading' })
+        let error = { message: data.message }
+        throw (error) // 抛出错误信息，交给dva处理
+      }
+    },
+    * updateDocHtml ({ payload }, { call, put }) {
+      yield put({type:'setDocHtml',payload:{...payload}});
+    },
   },
 
   reducers: {
+    setDocHtml(state,action){
+      return{
+        ...state,
+        ...action.payload,
+      }
+    },
     getCheckListTableDataSourceSuccess (state, action) {
       const { checkListTableDataSource, pagination, checkListTableLoading } = action.payload // 从payload中展开需要的属性
       return {
@@ -203,9 +241,20 @@ export default {
     hideCheckModal (state) {
       return { ...state, checkModalVisible: false }
     },
-
+    showMaterialModal(state,action){
+      return {
+        ...state,
+        ...action.payload,
+        materialModalVisible:true,
+      }
+    },
+    hideMaterialModal(state,action){
+      return{
+        ...state,
+        materialModalVisible:false,
+      }
+    },
     showAdviceModal (state,action) {
-      console.log(...action.payload)
       return { ...state,...action.payload, adviceModalVisible: true }
     },
     hideAdviceModal (state,action) {

@@ -71,7 +71,7 @@ class ApplyList extends Component {
         scroll={{ x:500 }}
         size="small"
         bordered
-        rowKey={record => record.id}
+        rowKey="id"
       />
     )
   }

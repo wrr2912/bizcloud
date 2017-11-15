@@ -9,20 +9,23 @@ const CheckboxGroup = Checkbox.Group
 class MaterialList extends Component {
 
   static propTypes = {
-    materialList: PropTypes.object.isRequired,
+    materialList: PropTypes.array.isRequired,
     setKey:PropTypes.func.isRequired,
+    updateDocHtml:PropTypes.func.isRequired,
   }
 
   state = {
     materialList: this.props.materialList,
     setKey: this.props.setKey,
+    updateDocHtml:this.props.updateDocHtml,
   }
 
   render() {
     const handleClick = (records)=>{
-      console.log(records)
-      if(!records.isLeaf){
+      if(records.isLeaf){
         this.state.setKey(records);
+        this.state.updateDocHtml(records.html);
+
       }
     }
     const columns = [{
@@ -40,7 +43,6 @@ class MaterialList extends Component {
     const rowSelection = {
 
     }
-    console.log(this.state.materialList)
 
     return (
         <DataTable
@@ -54,7 +56,7 @@ class MaterialList extends Component {
           size="small"
           defaultExpandAllRows
           bordered
-          rowKey={record => record.key}
+          rowKey="key"
         />
     )
   }

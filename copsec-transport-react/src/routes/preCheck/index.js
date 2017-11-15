@@ -8,6 +8,7 @@ import CheckListCreateModel from './checkListCreateModel'
 import CheckListDetail from './checkListDetail'
 import AdviceModal from './AdviceModal'
 import CheckModal from './CheckModal'
+import MaterialModal from './MaterialModal'
 
 import PreAdviceModal from './PreAdviceModal'
 
@@ -15,8 +16,8 @@ import PreAdviceModal from './PreAdviceModal'
 const PreCheckList = ({ location, dispatch, preCheckList, loading, app }) => {
   // 展开state中的属性
   const { checkListTableDataSource,
-    checkListTableLoading,pagination, createModelVisible,preAdviceVisible,
-    adviceModalVisible,checkModalVisible,adviceList,
+    checkListTableLoading,pagination,checkModalVisible, createModelVisible,preAdviceVisible,materialModalVisible,
+    adviceModalVisible,adviceList,
     docHtml,docKey,advice,checkItem,
     detailVisible, currentItem,detailObj } = preCheckList
   const { pageSize } = pagination
@@ -28,6 +29,14 @@ const PreCheckList = ({ location, dispatch, preCheckList, loading, app }) => {
     detailVisible,
     pagination,
     detailObj,
+    onOverlookItem(item){//材料审查
+      dispatch({
+        type: 'preCheckList/getMaterial',
+        payload: {
+          currentItem:item
+        },
+      })
+    },
     getAdviceList(record){
       console.log('-------意见详情----------'+record)
 
@@ -172,6 +181,7 @@ console.log(adviceList)
     }
   }
 
+
   const showCreateModal = () => {
     dispatch({
       type: 'preCheckList/setCreateModelVisible',
@@ -180,6 +190,34 @@ console.log(adviceList)
         editObj: null,
       },
     })
+  }
+  const materialModalProps = {
+    item: currentItem,
+    checkItem: checkItem,
+    visible: materialModalVisible,
+    docHtml:docHtml,
+    docKey:docKey,
+    maskClosable: false,
+    title:  '在线预览',
+    wrapClassName: 'vertical-center-modal',
+
+    updateDocHtml:(data)=>{
+      dispatch({
+        type: 'preCheckList/updateDocHtml',
+        payload:{docHtml:data},
+      })
+    },
+    setDocKey(data){
+      dispatch({
+        type: 'preCheckList/setDocKey',
+        payload:data
+      })
+    },
+    onCancel () {
+      dispatch({
+        type: 'preCheckList/hideMaterialModal',
+      })
+    },
   }
   const filterProps = {
 
@@ -207,8 +245,6 @@ console.log(adviceList)
         pathname: '/license',
       }))
     },
-
-
   }
   return (
     <div className="content-inner">
@@ -222,7 +258,7 @@ console.log(adviceList)
       </Row>
       {preAdviceVisible && <PreAdviceModal {...preAdviceProps}/> }
       {checkModalVisible && <CheckModal {...checkModalProps} {...adviceModalProps}/>}
-
+      {materialModalVisible && <MaterialModal {...materialModalProps}/>}
     </div>
   )
 }

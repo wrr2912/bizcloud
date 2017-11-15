@@ -2,22 +2,13 @@ import { request, config } from '../utils'
 
 const { serviceDomain, defaultPageSize } = config
 
-export async function getLicenseTableDataSource (params) {
+export async function getTableDataSource (params) {
   let currentPage = params.currentPage ? params.currentPage - 1 : 0
   let pageSize = params.pageSize ? params.pageSize : defaultPageSize
+    console.log('services/censor[getTableDataSource]' + params)
   let url = `${serviceDomain}/license/apply/getpage?pageNumber=${currentPage}&pageSize=${pageSize}`
-
   return request({
     url,
-    data: params,
-    method: 'POST',
-    withCredential: true,
-  })
-}
-
-export async function createLicense (params) {
-  return request({
-    url: `${serviceDomain}/license/add`,
     data: params,
     method: 'POST',
     withCredential: true,
@@ -92,14 +83,6 @@ export async function getMaterial (params) {
     withCredential: true,
   })
 }
-export async function matchToUser (params) {
-  return request({
-    url: `${serviceDomain}/license/apply/handleMatchToUser`,
-    data: params,
-    method: 'POST',
-    withCredential: true,
-  })
-}
 export async function acceptTask (params) {
   return request({
     url: `${serviceDomain}/license/apply/accepttask?id=${params}`,
@@ -111,23 +94,6 @@ export async function backTask (params) {
   return request({
     url: `${serviceDomain}/license/apply/backtask?id=${params.id}`,
     method: 'PUT',
-    withCredential: true,
-  })
-}
-export async function deleteLicense (params) {
-  return request({
-    url: `${serviceDomain}/license/delete?id=${params.id}`,
-    method: 'DELETE',
-    withCredential: true,
-  })
-}
-export async function getCompleteUser(params){
-
-  return request({
-    url: `${serviceDomain}/sys/user/getUserList`,
-    method: 'POST',
-    data: params,
-    headers: {'Content-Type':'application/json'},
     withCredential: true,
   })
 }

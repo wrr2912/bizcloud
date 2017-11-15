@@ -2,8 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Form, Input, InputNumber, Row, Col, Icon, Radio, Modal, Button, Cascader ,AutoComplete} from 'antd'
 import MaterialList from './MaterialList';
-import styles from './CheckModal.less'
-import AdviceForm from './components/AdviceForm'
+import styles from './MaterialModal.less'
 const RadioGroup = Radio.Group;
 const Option = AutoComplete.Option;
 const FormItem = Form.Item
@@ -77,7 +76,6 @@ const modal = ({
     ...checkModalProps,
     onOk: handleOk,
   }
-  console.log("adviceFormVisible:"+adviceFormVisible);
   const formItemLayout = {
     labelCol: {
       span: 2,
@@ -86,6 +84,7 @@ const modal = ({
       span: 22,
     },
   }
+ // checkItem = [{...checkItem[4]}]
    const MaterialListGen = () => <MaterialList materialList={checkItem} setKey={setKey} updateDocHtml={getDocument}/>
   return (
 
@@ -108,32 +107,6 @@ const modal = ({
           </Col>
         </Row>
       </div>
-      {adviceFormVisible && <Form layout="horizontal">
-        <FormItem label="审核结果" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('reviewResult', {
-            rules: [
-              {
-                message:"审核结果是必填项",
-                required: true,
-              }
-            ]
-          })(<RadioGroup >
-            <Radio value={1}>准予</Radio>
-            <Radio value={2}>不准予</Radio>
-          </RadioGroup>)}
-        </FormItem>
-        <FormItem label="审核意见" hasFeedback {...formItemLayout}>
-          {getFieldDecorator('advice', {
-            rules: [
-              {
-                message:"审核意见是必填项",
-                required: true,
-              }
-            ]
-          })(<TextArea placeholder="填写审核意见" autosize={{ minRows:6, maxRows: 10 }} />)}
-        </FormItem>
-
-      </Form>}
     </Modal>
 
   )

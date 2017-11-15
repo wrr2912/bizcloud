@@ -1,9 +1,8 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import moment from 'moment'
-import { FilterItem } from '../../components'
+import { FilterItem } from '../../../components/index'
 import { Form, Button, Row, Col, DatePicker, Input, Cascader, Switch } from 'antd'
-import city from '../../utils/city'
+import city from '../../../utils/city'
 
 const Search = Input.Search
 const { RangePicker } = DatePicker
@@ -22,11 +21,7 @@ const TwoColProps = {
 }
 
 const Filter = ({
-                  onAdd,
-                  isMotion,
-                  switchIsMotion,
-                  onFilterChange,
-                  filter,
+                  filter, onFilterChange,
                   form: {
                     getFieldDecorator,
                     getFieldsValue,
@@ -69,7 +64,6 @@ const Filter = ({
     fields = handleFields(fields)
     onFilterChange(fields)
   }
-
   const { companyName ,applyItems} = filter
 
   return (
@@ -86,22 +80,12 @@ const Filter = ({
          <Button type="primary" size="large" className="margin-right search" onClick={handleSubmit}  icon="search">检索</Button>
         <Button type="danger" size="large" onClick={handleReset} className="margin-right reset" icon="reload">重置</Button>
       </Col>
-      {/*<Col {...TwoColProps} xl={{ span: 10 }} md={{ span: 24 }} sm={{ span: 24 }}>*/}
-        {/*<div style={{ display: 'flex', justifyContent: 'space-between' }}>*/}
-          {/*<div >*/}
-              {/*/!*<Button size="large" type="primary"  onClick={onAdd} className="margin-right" icon="user-add">添加</Button>*!/*/}
-            {/*<Button size="large" type="danger" className="margin-right" icon="user-delete">删除</Button>*/}
-          {/*</div>*/}
-        {/*</div>*/}
-      {/*</Col>*/}
     </Row>
+
   )
 }
 
 Filter.propTypes = {
-  onAdd: PropTypes.func,
-  isMotion: PropTypes.bool,
-  switchIsMotion: PropTypes.func,
   form: PropTypes.object,
   filter: PropTypes.object,
   onFilterChange: PropTypes.func,

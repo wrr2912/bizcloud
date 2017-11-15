@@ -4,7 +4,7 @@ import license from '../../utils/license'
 import licenseCheck from '../../utils/licenseCheck'
 import docHtml from '../../utils/docHtml'
 import { getLicenseTableDataSource,saveApply,saveIssue ,showCompany,saveCollectCheck,chiefsCheck,directorCheck,getMaterial,getMaterialList,createLicense, acceptTask,saveAdvice, backTask, getCompleteUser, matchToUser, deleteLicense } from '../../services/license'
-
+import {getDocHtml} from '../../services/materials'
 
 const { defaultPageSize } = config
 
@@ -25,6 +25,7 @@ export default {
     matchModalVisible: false,//分配
     checkModalVisible: false,//审查
     adviceModalVisible:false,//填写意见
+    adviceFormVisible:false,//经办人审查意见
     collectModalVisible:false,//司集体审查
     issueModalVisible:false,//发证
     chiefsModelVisible:false,
@@ -32,10 +33,14 @@ export default {
     goverVisible: false,
     adminVisible: false,
     companyVisible:false,
+    opinionBookVisible:false,
+    decisionBookVisible:false,
     company:null,
     advice:'',
     adviceList:[],
     searchItem:[],
+    opinionItems:{},
+    decisionItems:{},
     docKey:'',
     checkItem: [],//审查材料数据
     docHtml:docHtml,//审查文档
@@ -79,6 +84,9 @@ export default {
         throw (error) // 抛出错误信息，交给dva处理
       }
     },
+    * updateDocHtml ({ payload }, { call, put }) {
+        yield put({type:'setDocHtml',payload:{...payload}});
+    },
     * onAcceptItem({ payload }, { call, put }){
       const data = yield call(acceptTask, payload.currentItem.id)
       if (data.success) { // 判断获取结果是否成功
@@ -108,6 +116,44 @@ export default {
 
       }
 
+    },
+    * showOpinionBook({payload},{call,put}){
+
+      const opinionItems = {
+        code:'JL02699',
+        acceptDate:'2017年8月31日',
+        companyName:'南宁铁路局（柳州车辆段柳州检修车间）',
+        productType:'P62K、P62NK、P64GK、P64K棚车',
+        productNumber:'0401',
+        licenseType:'维修(厂修)',
+        arraignment:'提审字〔2017〕第563号',
+        operatorName:'wrr',
+        chief:'zzz',
+        deputy:'deputy',
+        director:'director',
+        advice:'准予许可'
+      }
+      yield put({type:'setOpinionItems',payload:{opinionItems,currentItem:payload.currentItem}});
+      yield put({type:'showOpinionBookModal'});
+    },
+    * showDecisionBook({payload},{call,put}){
+      const decisionItems = {
+        code:'JL02699',
+        acceptDate:'2017年8月31日',
+        companyName:'南宁铁路局（柳州车辆段柳州检修车间）',
+        productType:'P62K、P62NK、P64GK、P64K棚车',
+        productNumber:'0401',
+        licenseType:'维修(厂修)',
+        arraignment:'提审字〔2017〕第563号',
+        operatorName:'wrr',
+        chief:'zzz',
+        deputy:'deputy',
+        director:'director',
+        certificateNumber:'TXLW0401-02011',
+        trialScope:'2022年7月12日',
+      }
+      yield put({type:'setDecisionItems',payload:{decisionItems,currentItem:payload.currentItem}});
+      yield put({type:'showDecisionBookModal'});
     },
     * showCompany({ payload }, { call, put }){
 
@@ -155,11 +201,26 @@ export default {
     * checkLicense({ payload }, { call, put }){
       let data = yield call(getMaterial, payload.currentItem.id)
       if(data.success){
+        const rows = data.rows;
+        let docKey = '';
+        let docHtml = '';
+
+        if(rows != null && rows.length  > 0){
+          let {children} = rows[0];
+          if(children != null && children.length  > 0){
+            docKey = children[0];
+            docHtml = docKey.html;
+          }
+        }
+
         yield put({
           type: 'showCheckModal',
           payload: {
             currentItem: payload.currentItem,
-            checkItem:data.rows,
+            adviceFormVisible:payload.adviceFormVisible,
+            checkItem:rows,
+            docKey:docKey,
+            docHtml:docHtml
           }
         })
       }else {
@@ -167,8 +228,6 @@ export default {
         let error = { message: data.message }
         throw (error) // 抛出错误信息，交给dva处理
       }
-
-
     },
     * workAdvice({ payload }, { call, put }){
 
@@ -257,6 +316,16 @@ export default {
         throw (error) // 抛出错误信息，交给dva处理
       }
     },
+    * saveOpinionBook({payload},{call,put}){
+      let data = yield call(saveIssue,payload)
+      if(data.success){
+        yield put({type:"hideOpinionBookModal"});
+      }else{
+        yield put({ type: 'HideLoading' })
+        let error = { message: data.message }
+        throw (error) // 抛出错误信息，交给dva处理
+      }
+    },
   },
 
   reducers: {
@@ -274,6 +343,12 @@ export default {
     },
     getCompleteUserSuccess(state,action){
       return { ...state,...action.payload}
+    },
+    setOpinionItems(state,action){
+      return {...state,...action.payload}
+    },
+    setDecisionItems(state,action){
+      return {...state,...action.payload}
     },
     showModal (state,action) {
       return { ...state,...action.payload,  modalVisible: true }
@@ -372,8 +447,6 @@ export default {
 
     },
     showCompanyVisible(state, action){
-      console.log('--------企业信息---------')
-      console.log(...action.payload)
       return {
         ...state,
         ...action.payload,
@@ -395,5 +468,23 @@ export default {
         createModelVisible: true,
       }
     },
+    setDocHtml(state,action){
+      return{
+        ...state,
+        ...action.payload,
+      }
+    },
+    showOpinionBookModal(state,action){
+      return{...state,opinionBookVisible:true,}
+    },
+    hideOpinionBookModal(state,action){
+      return{...state,opinionBookVisible:false,}
+    },
+    showDecisionBookModal(state,action){
+      return{...state,decisionBookVisible:true,}
+    },
+    hideDecisionBookModal(state,action){
+      return{...state,decisionBookVisible:false,}
+    }
   },
 }

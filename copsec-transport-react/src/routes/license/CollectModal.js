@@ -126,69 +126,8 @@ const modal = ({
             <Radio value={0}>否</Radio>
           </RadioGroup>)}
         </FormItem>
-        <FormItem label="地方政府意见" hasFeedback {...formItemLayout}>
 
-            <div>
-            <Row>
-              <Col span="8">
-                <Checkbox value="1" onChange={goverChange}>地方政府</Checkbox>
-                {getFieldDecorator('upload', {
-                  valuePropName: 'fileList',
-                  getValueFromEvent: {normFile},
-                  required:false
-                })(
-                  <Upload name="logo" action="" listType="">
-                    <Button>
-                      <Icon type="upload" /> 点击上传附件
-                    </Button>
-                  </Upload>
-                )}
-              </Col>
 
-                {getFieldDecorator('localGover', {
-
-                  })(
-                  <Col span="16">
-                    {goverVisible && <TextArea placeholder="填写地方政府意见" autosize={{ minRows: 2, maxRows: 6 }} />}
-                  </Col>
-                 )}
-
-            </Row>
-
-            </div>
-
-        </FormItem>
-
-        <FormItem label="地方监管局意见" hasFeedback {...formItemLayout}>
-
-            <div>
-              <Row>
-                <Col span="8">
-                  <Checkbox value="2" onChange={adminChange}>地区监管局</Checkbox>
-                  {getFieldDecorator('upload1', {
-                    valuePropName: 'fileList',
-                    getValueFromEvent: {normFile},
-                    required:false
-                  })(
-                    <Upload name="logo" action="" listType="">
-                      <Button>
-                        <Icon type="upload" /> 点击上传附件
-                      </Button>
-                    </Upload>
-                  )}
-                </Col>
-                {getFieldDecorator('localAdmin', {
-
-                })(
-                <Col span="16">
-                  {adminVisible && <TextArea placeholder="填写地区监管局意见" autosize={{ minRows: 2, maxRows: 6 }} />}
-                </Col>
-                )}
-              </Row>
-
-            </div>
-
-        </FormItem>
 
       <FormItem label="审核结果" hasFeedback {...formItemLayout}>
         {getFieldDecorator('reviewResult', {
@@ -215,7 +154,20 @@ const modal = ({
           ]
         })(<TextArea placeholder="填写集体审查意见" autosize={{ minRows: 4, maxRows: 6 }} />)}
       </FormItem>
+      <FormItem label="附件" hasFeedback {...formItemLayout}>
 
+              {getFieldDecorator('upload', {
+                valuePropName: 'fileList',
+                getValueFromEvent: {normFile},
+                required:false
+              })(
+                <Upload name="logo" action="" listType="">
+                  <Button>
+                    <Icon type="upload" /> 上传附件
+                  </Button>
+                </Upload>
+              )}
+      </FormItem>
     </Form>
     </Modal>
   )

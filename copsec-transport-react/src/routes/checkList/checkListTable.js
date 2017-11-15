@@ -102,6 +102,15 @@ const CheckListTable = ({ dispatch, detailObj, checkListTableDataSource,detailVi
           <a onClick={()=>showDetailModal(record)}>详情</a>
         </div>
       ),
+    },{
+      title: '操作',
+      // dataIndex: 'reviewAdvices',
+      width: 200,
+      render: (text, record) => (
+        <div>
+          <a >移除</a>
+        </div>
+      ),
     },
   ]
 

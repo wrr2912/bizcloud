@@ -71,8 +71,13 @@ const CompanyModal = ({
       </Row>
       <br/>
       <Row>
-        <Col span="8">联系人：</Col>
+        <Col span="8">企业联系人：</Col>
         <Col span="12">{company.keyContact}</Col>
+      </Row>
+      <br/>
+      <Row>
+        <Col span="8">联系方式：</Col>
+        <Col span="12">{company.contactTele}</Col>
       </Row>
     <br/>
     </Modal>

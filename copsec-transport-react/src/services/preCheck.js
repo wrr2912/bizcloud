@@ -24,7 +24,18 @@ export async function getCheckListTableDataSource (params) {
 //     withCredential: true,
 //   })
 // }
+
+export async function getPredoc(params){
+  return request({
+    url:`${serviceDomain}/review/material/getdocs`,
+    data:params,
+    method:'GET',
+    withCredential:true,
+  });
+}
+
 export async function saveCheckList (params) {
+  console.log(params);
   return request({
     url: `${serviceDomain}/reviewlist/addone`,
     data: params,
